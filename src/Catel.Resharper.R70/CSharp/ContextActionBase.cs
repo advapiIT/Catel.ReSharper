@@ -9,7 +9,7 @@ namespace Catel.ReSharper.CSharp
     using JetBrains.ReSharper.Feature.Services.CSharp.Analyses.Bulbs;
 #endif
 
-#if R70 || R71 || R80
+#if R70 || R71 || R80 || R81 || R82
     using JetBrains.ReSharper.Feature.Services.CSharp.Bulbs;
 
 #elif R61
@@ -24,7 +24,7 @@ namespace Catel.ReSharper.CSharp
     public abstract class ContextActionBase : 
 #if R90
         JetBrains.ReSharper.Feature.Services.ContextActions.ContextActionBase
-#elif R70 || R71 || R80
+#elif R70 || R71 || R80 || R81 || R82 
         JetBrains.ReSharper.Intentions.Extensibility.ContextActionBase
 #elif R61
         BulbItemImpl, IContextAction

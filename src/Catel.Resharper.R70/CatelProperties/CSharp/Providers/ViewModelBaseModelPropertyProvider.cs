@@ -18,7 +18,7 @@ namespace Catel.ReSharper.CatelProperties.CSharp.Providers
     using JetBrains.ReSharper.Psi.CSharp;
     using JetBrains.ReSharper.Psi.CSharp.Tree;
     using JetBrains.ReSharper.Psi.Resolve;
-#if R80 || R90
+#if R80 || R81 || R82 || R90
     using JetBrains.ReSharper.Psi.Tree;
 #endif
     using JetBrains.ReSharper.Psi.Util;
@@ -63,7 +63,8 @@ namespace Catel.ReSharper.CatelProperties.CSharp.Providers
             {
                 IClassLikeDeclaration classLikeDeclaration = context.ClassDeclaration;
                 ITypeElement declaredElement = classLikeDeclaration.DeclaredElement;
-#if R80 || R90
+#if R80 || R81 || R82 || R90
+
                 var moduleReferenceResolveContext = context.Anchor.GetResolveContext();
                 ITypeElement viewModelBaseElement = TypeFactory.CreateTypeByCLRName(CatelMVVM.ViewModelBase, context.PsiModule, moduleReferenceResolveContext).GetTypeElement();
 #else
@@ -71,7 +72,7 @@ namespace Catel.ReSharper.CatelProperties.CSharp.Providers
 #endif
                 if (declaredElement is IClass && declaredElement.IsDescendantOf(viewModelBaseElement))
                 {
-#if R80 || R90
+#if R80 || R81 || R82 || R90
                     IDeclaredType modelAttributeClrType = TypeFactory.CreateTypeByCLRName(CatelMVVM.ModelAttribute, context.PsiModule, moduleReferenceResolveContext);
                 IDeclaredType viewModelToModelAttributeClrType = TypeFactory.CreateTypeByCLRName(CatelMVVM.ViewModelToModelAttribute, context.PsiModule, moduleReferenceResolveContext);
 #else
@@ -92,8 +93,9 @@ namespace Catel.ReSharper.CatelProperties.CSharp.Providers
                     var viewModelProperties = new Dictionary<string, List<string>>();
                     foreach (IProperty property in properties)
                     {
-#if R80 || R90
-                    IAttributeInstance viewModelToModel = property.GetAttributeInstances(false).FirstOrDefault(instance => Equals(instance.GetAttributeType(), viewModelToModelAttributeClrType));
+#if R80 || R81 || R82 || R90
+
+                        IAttributeInstance viewModelToModel = property.GetAttributeInstances(false).FirstOrDefault(instance => Equals(instance.GetAttributeType(), viewModelToModelAttributeClrType));
 #else
                         IAttributeInstance viewModelToModel = property.GetAttributeInstances(false).FirstOrDefault(instance => Equals(instance.AttributeType, viewModelToModelAttributeClrType));
 #endif
@@ -120,7 +122,7 @@ namespace Catel.ReSharper.CatelProperties.CSharp.Providers
 
                     foreach (IProperty property in properties)
                     {
-#if R80 || R90
+#if R80 || R81 || R82 || R90
                         if (property.GetAttributeInstances(false).FirstOrDefault(instance => Equals(instance.GetAttributeType(), modelAttributeClrType)) != null)
 #else
                         if (property.GetAttributeInstances(false).FirstOrDefault(instance => Equals(instance.AttributeType, modelAttributeClrType)) != null)

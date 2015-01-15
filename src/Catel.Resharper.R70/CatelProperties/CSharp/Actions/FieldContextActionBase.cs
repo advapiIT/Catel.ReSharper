@@ -89,7 +89,7 @@ namespace Catel.ReSharper.CatelProperties.CSharp.Actions
                     {
                         this.ClassDeclaration = this.FieldDeclaration.Parent.Parent.Parent as IClassDeclaration;
                         ITypeElement classDeclaredElement = this.ClassDeclaration.DeclaredElement;
-#if R80 || R90
+#if R80 || R81 || R82 || R90
                         if (classDeclaredElement != null && (classDeclaredElement.IsDescendantOf(CatelCore.GetDataObjectBaseTypeElement(this.Provider.PsiModule, selectedElement.GetResolveContext())) || classDeclaredElement.IsDescendantOf(CatelCore.GetModelBaseTypeElement(this.Provider.PsiModule, selectedElement.GetResolveContext()))) && (this.FieldDeclaration.IsStatic && this.FieldDeclaration.Initial is IExpressionInitializer))
 #else
                         if (classDeclaredElement != null && (classDeclaredElement.IsDescendantOf(CatelCore.GetDataObjectBaseTypeElement(this.Provider.PsiModule)) || classDeclaredElement.IsDescendantOf(CatelCore.GetModelBaseTypeElement(this.Provider.PsiModule))) && (this.FieldDeclaration.IsStatic && this.FieldDeclaration.Initial is IExpressionInitializer))

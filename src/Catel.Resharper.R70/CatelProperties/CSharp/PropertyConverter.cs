@@ -19,7 +19,7 @@ namespace Catel.ReSharper.CatelProperties.CSharp
     using JetBrains.ReSharper.Psi.CSharp;
     using JetBrains.ReSharper.Psi.CSharp.Tree;
     using JetBrains.ReSharper.Psi.ExtensionsAPI.Tree;
-#if R80 || R90
+#if R80 || R81 || R82 || R90
     using JetBrains.ReSharper.Psi.Modules;
 #endif
     using JetBrains.ReSharper.Psi.Tree;
@@ -115,7 +115,7 @@ namespace Catel.ReSharper.CatelProperties.CSharp
         {
             Argument.IsNotNull(() => propertyDeclaration);
 
-#if R80 || R90
+#if R80 || R81 || R82 || R90
             IDeclaredType propertyDataType = TypeFactory.CreateTypeByCLRName(CatelCore.PropertyData, this.psiModule, propertyDeclaration.GetResolveContext());
 #else
             IDeclaredType propertyDataType = TypeFactory.CreateTypeByCLRName(CatelCore.PropertyData, this.psiModule);
@@ -178,7 +178,7 @@ namespace Catel.ReSharper.CatelProperties.CSharp
                                 methodName);
                     }
 
-#if R80 || R90
+#if R80 || R81 || R82 || R90
                     IDeclaredType advancedPropertyChangedEventArgsType = TypeFactory.CreateTypeByCLRName(CatelCore.AdvancedPropertyChangedEventArgs, this.psiModule, propertyDeclaration.GetResolveContext());
 #else
                     IDeclaredType advancedPropertyChangedEventArgsType = TypeFactory.CreateTypeByCLRName(CatelCore.AdvancedPropertyChangedEventArgs, this.psiModule);

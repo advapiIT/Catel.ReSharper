@@ -86,6 +86,7 @@
         Push "v8.0"
 	Push "v8.1"
 	Push "v8.2"
+	Push "v9.0"
 	${Do}
             Pop $0
             ReadRegStr $1 HKLM "Software\JetBrains\ReSharper\$0" InstallDir
@@ -104,6 +105,8 @@
                     File /r "..\..\output\Debug\v8.1\*.dll" 
                 ${ElseIf} $0 == 'v8.2'
                     File /r "..\..\output\Debug\v8.2\*.dll" 
+                ${ElseIf} $0 == 'v9.0'
+                    File /r "..\..\output\Debug\v8.0\*.dll" 
                 ${EndIf}
 
                 Push true
@@ -150,6 +153,7 @@
         Push "v8.0"
         Push "v8.1"
         Push "v8.2"
+	Push "v9.0"
 	${Do}
             Pop $0
             ReadRegStr $1 HKLM "${REGKEY}" "$0"

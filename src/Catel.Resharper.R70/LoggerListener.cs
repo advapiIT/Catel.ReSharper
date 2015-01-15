@@ -9,7 +9,7 @@ namespace Catel.ReSharper
     using Catel.Logging;
 
     using JetBrains.Util;
-#if R80 || R90
+#if R80 || R81 || R82 || R90
     using JetBrains.Util.Logging;
 #endif
 

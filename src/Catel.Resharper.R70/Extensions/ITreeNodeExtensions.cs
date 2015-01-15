@@ -12,9 +12,7 @@ namespace Catel.ReSharper.Extensions
 
     using JetBrains.DocumentModel;
     using JetBrains.ReSharper.Psi.Tree;
-#if !R80    
     using JetBrains.Util;
-#endif
 
     /// <summary>
     /// The i tree node extensions.
@@ -56,7 +54,7 @@ namespace Catel.ReSharper.Extensions
             return fields;
         }
 
-#if R80 || R90
+#if R81 || R82 || R90
         /// <summary>
         /// Get the fields.
         /// </summary>

@@ -22,7 +22,7 @@ namespace Catel.ReSharper.CatelProperties.CSharp.Actions
 #endif
     using JetBrains.ReSharper.Psi;
     using JetBrains.ReSharper.Psi.CSharp.Tree;
-#if R80 || R90
+#if R80 || R81 || R82 || R90
     using JetBrains.ReSharper.Psi.Tree;
 #endif
     using JetBrains.TextControl;
@@ -108,7 +108,7 @@ namespace Catel.ReSharper.CatelProperties.CSharp.Actions
         {
             ITypeElement typeElement;
             IAttribute viewModelToModelAttribute = null;
-#if R80 || R90
+#if R80 || R81 || R82 || R90
             if (CatelMVVM.TryGetViewModelToModelAttributeTypeElement(this.Provider.PsiModule, this.Provider.SelectedElement.GetResolveContext(), out typeElement))
 #else
             if (CatelMVVM.TryGetViewModelToModelAttributeTypeElement(this.Provider.PsiModule, out typeElement))

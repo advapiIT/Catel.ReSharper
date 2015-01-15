@@ -24,7 +24,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>..\..\output\debug\v8.2\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;JET_MODE_ASSERT;R80</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;JET_MODE_ASSERT;R82</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>..\..\output\debug\v8.2\Catel.ReSharper.xml</DocumentationFile>
@@ -33,7 +33,7 @@
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>..\..\output\Release\v8.2\</OutputPath>
-    <DefineConstants>TRACE;JET_MODE_ASSERT;R80</DefineConstants>
+    <DefineConstants>TRACE;JET_MODE_ASSERT;R82</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>..\..\output\Release\v8.2\Catel.ReSharper.xml</DocumentationFile>

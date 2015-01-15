@@ -16,7 +16,7 @@ namespace Catel.ReSharper.Arguments
 
     using JetBrains.Application;
     using JetBrains.Application.Progress;
-#if R80 || R90
+#if R80 || R81 || R82 ||R90
     using JetBrains.DocumentModel;
 #endif
     using JetBrains.ProjectModel;
@@ -94,7 +94,7 @@ namespace Catel.ReSharper.Arguments
             {
                 if (this.Provider.SelectedElement != null)
                 {
-#if R80 || R90
+#if R80 || R81 || R82 || R90
                     IDeclaredType catelArgumentType = TypeFactory.CreateTypeByCLRName(CatelCore.Argument, this.Provider.PsiModule, this.Provider.SelectedElement.GetResolveContext());
 #else
                     IDeclaredType catelArgumentType = TypeFactory.CreateTypeByCLRName(CatelCore.Argument, this.Provider.PsiModule);
@@ -219,7 +219,7 @@ namespace Catel.ReSharper.Arguments
 
             // TODO: Detect the right position to insert the code.
             ITreeNode methodBodyFirstChild = this.methodDeclaration.Body.FirstChild;
-#if R80 || R90
+#if R81 || R82 || R90
             Dictionary<string, List<DocumentRange>> fields = null;
 #else
             Dictionary<string, List<TextRange>> fields = null;

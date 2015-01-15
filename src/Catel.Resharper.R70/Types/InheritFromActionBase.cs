@@ -20,7 +20,7 @@ namespace Catel.ReSharper.Types
     using JetBrains.ReSharper.Feature.Services.CSharp.Bulbs;
     using JetBrains.ReSharper.Psi;
     using JetBrains.ReSharper.Psi.CSharp.Tree;
-#if R80 || R90
+#if R80 || R81 || R82 || R90
     using JetBrains.ReSharper.Psi.Tree;
 #endif
     using JetBrains.TextControl;
@@ -89,10 +89,11 @@ namespace Catel.ReSharper.Types
             {
                 if (Provider.SelectedElement != null)
                 {
-#if R80 || R90
+#if R80 || R81 || R82 || R90
+
                     _superType = TypeFactory.CreateTypeByCLRName(this.SuperTypeName, this.Provider.PsiModule, this.Provider.SelectedElement.GetResolveContext());
 #else
-                	_superType = TypeFactory.CreateTypeByCLRName(SuperTypeName, Provider.PsiModule);
+                    _superType = TypeFactory.CreateTypeByCLRName(SuperTypeName, Provider.PsiModule);
 #endif
                     if (_superType.GetTypeElement() != null)
                     {

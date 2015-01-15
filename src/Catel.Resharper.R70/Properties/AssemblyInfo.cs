@@ -25,8 +25,8 @@ using JetBrains.Application.PluginSupport;
 [assembly: AssemblyCopyright("Copyright © Catel development team, 2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
-[assembly: AssemblyVersion("1.4.9.27")]
-[assembly: AssemblyInformationalVersion("1.4.9.27")]
+[assembly: AssemblyVersion("1.0.0.31")]
+[assembly: AssemblyInformationalVersion("1.0.0.31")]
 [assembly: ActionsXml("Catel.ReSharper.Actions.xml")]
 
 #if !R90
