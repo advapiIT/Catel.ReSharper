@@ -11,8 +11,14 @@ namespace Catel.ReSharper.Arguments
     using Catel.Logging;
     using Catel.ReSharper.Arguments.Helpers;
 
+#if R90
+    using JetBrains.ReSharper.Feature.Services.ContextActions;
+    using JetBrains.ReSharper.Feature.Services.CSharp.Analyses.Bulbs;
+#else
     using JetBrains.ReSharper.Feature.Services.Bulbs;
     using JetBrains.ReSharper.Feature.Services.CSharp.Bulbs;
+#endif
+
     using JetBrains.ReSharper.Psi;
     using JetBrains.ReSharper.Psi.CSharp.Tree;
 

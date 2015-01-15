@@ -12,6 +12,10 @@ namespace Catel.ReSharper.Extensions
     using JetBrains.DocumentModel;
 #endif
     using JetBrains.ReSharper.Feature.Services.LiveTemplates.Hotspots;
+#if R90
+    using JetBrains.DocumentModel;
+    using JetBrains.ReSharper.Feature.Services.LiveTemplates.Templates;
+#endif
     using JetBrains.ReSharper.LiveTemplates;
 #if !R80
     using JetBrains.Util;
@@ -23,7 +27,7 @@ namespace Catel.ReSharper.Extensions
     internal static class DictionaryWithKeyStringOfListOfTextRangeOrDocumentRangeExtensions
     {
         #region Public Methods and Operators
-#if R80
+#if R80 || R90
         /// <summary>
         /// Gets the hotspot information.
         /// </summary>
@@ -68,7 +72,7 @@ namespace Catel.ReSharper.Extensions
         }
 #endif
 
-#if R80
+#if R80 || R90
         public static void Merge(this Dictionary<string, List<DocumentRange>> @this, Dictionary<string, List<DocumentRange>> fields)
         {
             Argument.IsNotNull(() => @this);

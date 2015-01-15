@@ -15,7 +15,7 @@ namespace Catel.ReSharper.CatelProperties.CSharp
     using JetBrains.ReSharper.Psi;
     using JetBrains.ReSharper.Psi.CSharp;
     using JetBrains.ReSharper.Psi.CSharp.Tree;
-#if R80
+#if R80 || R90
     using JetBrains.ReSharper.Psi.Tree;
 #endif
     using JetBrains.Util;
@@ -62,7 +62,7 @@ namespace Catel.ReSharper.CatelProperties.CSharp
 
             IClassLikeDeclaration classLikeDeclaration = context.ClassDeclaration;
             ITypeElement declaredElement = classLikeDeclaration.DeclaredElement;
-#if R80
+#if R80 || R90
             if (declaredElement is IClass && (declaredElement.IsDescendantOf(CatelCore.GetDataObjectBaseTypeElement(context.PsiModule, classLikeDeclaration.GetResolveContext())) || declaredElement.IsDescendantOf(CatelCore.GetModelBaseTypeElement(context.PsiModule, classLikeDeclaration.GetResolveContext()))))
 #else
             if (declaredElement is IClass && (declaredElement.IsDescendantOf(CatelCore.GetDataObjectBaseTypeElement(context.PsiModule)) || declaredElement.IsDescendantOf(CatelCore.GetModelBaseTypeElement(context.PsiModule))))

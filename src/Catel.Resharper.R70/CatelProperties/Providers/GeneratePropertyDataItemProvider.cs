@@ -14,7 +14,7 @@ namespace Catel.ReSharper.CatelProperties.Providers
     using JetBrains.ProjectModel;
     using JetBrains.ReSharper.Feature.Services.Generate.Actions;
     using JetBrains.ReSharper.Psi;
-#if R70 || R71 || R80
+#if R70 || R71 || R80 || R90
     using JetBrains.UI.Icons;
 #elif R61
     using System.Drawing;
@@ -52,7 +52,7 @@ namespace Catel.ReSharper.CatelProperties.Providers
 
             ISolution solution = dataContext.GetData(DataConstants.SOLUTION);
             var iconManager = solution.GetComponent<PsiIconManager>();
-#if R70 || R71 || R80
+#if R70 || R71 || R80 || R90
             IconId icon = iconManager.GetImage(CLRDeclaredElementType.PROPERTY);
 #elif R61
             Image icon = iconManager.GetImage(CLRDeclaredElementType.PROPERTY);

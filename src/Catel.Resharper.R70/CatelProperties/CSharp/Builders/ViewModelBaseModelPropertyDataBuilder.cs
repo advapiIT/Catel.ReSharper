@@ -18,6 +18,10 @@ namespace Catel.ReSharper.CatelProperties.CSharp.Builders
     using Catel.ReSharper.CatelProperties.CSharp.Patterns;
     using Catel.ReSharper.Identifiers;
 
+#if R90
+    using JetBrains.Metadata.Reader.API;
+#endif
+
     using JetBrains.ReSharper.Feature.Services.CSharp.Generate;
     using JetBrains.ReSharper.Feature.Services.Generate;
     using JetBrains.ReSharper.Psi;
@@ -52,7 +56,7 @@ namespace Catel.ReSharper.CatelProperties.CSharp.Builders
             get { return 0; }
         }
 
-#if R70 || R71 || R80
+#if R70 || R71 || R80 || R90
 
         /// <summary>
         /// The process.
@@ -80,7 +84,7 @@ namespace Catel.ReSharper.CatelProperties.CSharp.Builders
             Argument.IsNotNull(() => context);
 
             CSharpElementFactory factory = CSharpElementFactory.GetInstance(context.Root.GetPsiModule());
-#if R80
+#if R80 || R90
             IDeclaredType viewModelToModelAttributeClrType = TypeFactory.CreateTypeByCLRName(CatelMVVM.ViewModelToModelAttribute, context.PsiModule, UniversalModuleReferenceContext.Instance);
 #else
             IDeclaredType viewModelToModelAttributeClrType = TypeFactory.CreateTypeByCLRName(CatelMVVM.ViewModelToModelAttribute, context.PsiModule);
@@ -159,15 +163,15 @@ namespace Catel.ReSharper.CatelProperties.CSharp.Builders
                                 propertyDeclaration = ModificationUtil.AddChildAfter(classLikeDeclaration.Body.FirstChild, propertyDeclaration);
                             }
                         }
-#if R80
+#if R80 || R90
                         var fixedArguments = new List<AttributeValue> { new AttributeValue(ClrConstantValueFactory.CreateStringValue(model.ShortName, context.PsiModule, UniversalModuleReferenceContext.Instance)) };
 #else
                         var fixedArguments = new List<AttributeValue> { new AttributeValue(ClrConstantValueFactory.CreateStringValue(model.ShortName, context.PsiModule)) };
 #endif
                         if (propertyName != modelProperty.ShortName)
                         {
-#if R80
-                        fixedArguments.Add(new AttributeValue(ClrConstantValueFactory.CreateStringValue(modelProperty.ShortName, context.PsiModule,  UniversalModuleReferenceContext.Instance)));
+#if R80 || R90
+                            fixedArguments.Add(new AttributeValue(ClrConstantValueFactory.CreateStringValue(modelProperty.ShortName, context.PsiModule,  UniversalModuleReferenceContext.Instance)));
 #else
                             fixedArguments.Add(new AttributeValue(ClrConstantValueFactory.CreateStringValue(modelProperty.ShortName, context.PsiModule)));
 #endif

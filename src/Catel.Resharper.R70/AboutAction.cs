@@ -9,12 +9,21 @@ namespace Catel.ReSharper
 
     using JetBrains.ActionManagement;
     using JetBrains.Application.DataContext;
+#if R90
+    using JetBrains.UI.ActionsRevised;
+#endif
 
     /// <summary>
     /// The about action
     /// </summary>
+#if R90
+    [Action("Catel.ReSharper.About")]
+
+    public class AboutAction : IExecutableAction
+#else
     [ActionHandler("Catel.ReSharper.About")]
     public class AboutAction : IActionHandler
+#endif
     {
         #region IActionHandler Members
 

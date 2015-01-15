@@ -16,10 +16,14 @@ namespace Catel.ReSharper.Arguments
 
     using JetBrains.Application;
     using JetBrains.Application.Progress;
-#if R80
+#if R80 || R90
     using JetBrains.DocumentModel;
 #endif
     using JetBrains.ProjectModel;
+#if R90
+    using JetBrains.ReSharper.Feature.Services.CSharp.Analyses.Bulbs;
+    using JetBrains.ReSharper.Resources.Shell;
+#endif
     using JetBrains.ReSharper.Feature.Services.CSharp.Bulbs;
     using JetBrains.ReSharper.Feature.Services.LiveTemplates.Hotspots;
     using JetBrains.ReSharper.Feature.Services.LiveTemplates.LiveTemplates;
@@ -90,7 +94,7 @@ namespace Catel.ReSharper.Arguments
             {
                 if (this.Provider.SelectedElement != null)
                 {
-#if R80
+#if R80 || R90
                     IDeclaredType catelArgumentType = TypeFactory.CreateTypeByCLRName(CatelCore.Argument, this.Provider.PsiModule, this.Provider.SelectedElement.GetResolveContext());
 #else
                     IDeclaredType catelArgumentType = TypeFactory.CreateTypeByCLRName(CatelCore.Argument, this.Provider.PsiModule);
@@ -208,7 +212,7 @@ namespace Catel.ReSharper.Arguments
 
             // TODO: Detect the right position to insert the code.
             ITreeNode methodBodyFirstChild = this.methodDeclaration.Body.FirstChild;
-#if R80
+#if R80 || R90
             Dictionary<string, List<DocumentRange>> fields = null;
 #else
             Dictionary<string, List<TextRange>> fields = null;
@@ -223,7 +227,6 @@ namespace Catel.ReSharper.Arguments
                 }
             }
             
-           
             HotspotInfo[] hotspotInfos = fields != null ? fields.AsHotspotInfos() : new HotspotInfo[] { };
             return hotspotInfos.Length == 0
                        ? (Action<ITextControl>)null

@@ -9,7 +9,7 @@ namespace Catel.ReSharper.Identifiers
 
     using JetBrains.Metadata.Reader.API;
     using JetBrains.ReSharper.Psi;
-#if R80
+#if R80 || R90
     using JetBrains.ReSharper.Psi.Modules;
 #endif
 
@@ -42,7 +42,7 @@ namespace Catel.ReSharper.Identifiers
         /// The PropertyData type name .
         /// </summary>
         public const string PropertyData = "Catel.Data.PropertyData";
-#if R80
+#if R80 || R90
         /// <summary>
         /// Try get model base type element.
         /// </summary>

@@ -9,7 +9,7 @@ namespace Catel.ReSharper
     using Catel.Logging;
 
     using JetBrains.Util;
-#if R80
+#if R80 || R90
     using JetBrains.Util.Logging;
 #endif
 
@@ -25,7 +25,7 @@ namespace Catel.ReSharper
         /// </summary>
         public LoggerListener()
         {
-#if DEBUG        
+#if DEBUG && !R90
             Logger.AppendListener(new DebugOutputLogEventListener("CatelR#"));
 #endif
         }
