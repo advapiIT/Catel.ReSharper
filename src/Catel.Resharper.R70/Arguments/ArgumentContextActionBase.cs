@@ -185,8 +185,11 @@ namespace Catel.ReSharper.Arguments
         {
             Argument.IsNotNull(() => solution);
             Argument.IsNotNull(() => progress);
-
+#if !R90
             IDocCommentBlockNode exceptionCommentBlock = null;
+#else
+            IDocCommentBlock exceptionCommentBlock = null;
+#endif
             XmlNode xmlDoc = this.methodDeclaration.GetXMLDoc(false);
             if (xmlDoc == null || !this.IsArgumentCheckDocumented(xmlDoc, this.parameterDeclaration))
             {
@@ -196,7 +199,11 @@ namespace Catel.ReSharper.Arguments
                         this.CreateExceptionXmlDoc(this.parameterDeclaration));
 
                 // TODO: Detect the right position to insert the document node.
+#if !R90
                 if (this.methodDeclaration.FirstChild is IDocCommentBlockNode)
+#else
+                if (this.methodDeclaration.FirstChild is IDocCommentBlock)
+#endif
                 {
                     ITreeNode lastChild = this.methodDeclaration.FirstChild.LastChild;
                     if (lastChild != null)

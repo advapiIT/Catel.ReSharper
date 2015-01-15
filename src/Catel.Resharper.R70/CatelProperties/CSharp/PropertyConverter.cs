@@ -143,7 +143,11 @@ namespace Catel.ReSharper.CatelProperties.CSharp
                 string methodName = this.ComputeMemberName(string.Format(NamePatterns.NotificationMethodName, propertyName));
 
                 IMethodDeclaration methodDeclaration;
+#if !R90
                 IDocCommentBlockNode methodComment;
+#else
+                IDocCommentBlock methodComment;
+#endif
                 if (forwardEventArgument)
                 {
                     if (includeInSerialization)
@@ -275,10 +279,9 @@ namespace Catel.ReSharper.CatelProperties.CSharp
             // ICSharpTypeMemberDeclaration pushedPropertyDataMemberDeclaration = context.ClassDeclaration.MemberDeclarations.FirstOrDefault(declaration => declaration.DeclaredName == propertyDataName);
             if (multipleFieldDeclaration != null && multipleFieldDeclaration.Parent != null)
             {
-                IDocCommentBlockNode propertyComment =
-                    this.factory.CreateDocCommentBlock(string.Format(DocumentationPatterns.PropertyData, propertyName));
-                ModificationUtil.AddChildBefore(
-                    multipleFieldDeclaration, multipleFieldDeclaration.FirstChild, propertyComment);
+
+                var propertyComment = this.factory.CreateDocCommentBlock(string.Format(DocumentationPatterns.PropertyData, propertyName));
+                ModificationUtil.AddChildBefore(multipleFieldDeclaration, multipleFieldDeclaration.FirstChild, propertyComment);
             }
 
             // TODO: Move this behavoir to an extension method or helper class is duplicated.

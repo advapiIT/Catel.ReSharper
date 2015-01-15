@@ -56,7 +56,7 @@ namespace Catel.ReSharper.Extensions
             return fields;
         }
 
-#if R80
+#if R80 || R90
         /// <summary>
         /// Get the fields.
         /// </summary>
