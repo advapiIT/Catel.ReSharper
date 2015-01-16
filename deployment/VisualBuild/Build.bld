@@ -392,26 +392,26 @@
 		<step action='Group'>
 			<buildfailsteps type='11'>0</buildfailsteps>
 			<indent type='3'>1</indent>
-			<name>NuGet</name>
+			<name>NuGet [8.0-8.2]</name>
 		</step>
 		<step action='Copy Files'>
 			<Converted type='11'>-1</Converted>
 			<Delay>15</Delay>
-			<DestDir>%PROJDIR%\..\..\output\NuGet\</DestDir>
+			<DestDir>%PROJDIR%\..\..\output\NuGet\8.0-8.2</DestDir>
 			<Ext>Catel.ReSharper.nuspec</Ext>
 			<Incremental type='11'>-1</Incremental>
 			<LogCopied type='11'>-1</LogCopied>
 			<ReadOnly type='11'>-1</ReadOnly>
 			<Retries>10</Retries>
-			<SourceDir>%PROJDIR%\..\..\deployment\NuGet\</SourceDir>
+			<SourceDir>%PROJDIR%\..\..\deployment\NuGet\8.0-8.2</SourceDir>
 			<TBD type='11'>-1</TBD>
 			<buildfailsteps type='11'>0</buildfailsteps>
 			<indent type='3'>2</indent>
 			<name>Copy NuGet File</name>
 		</step>
 		<step action='Replace in File'>
-			<FileIn>%PROJDIR%\..\..\output\NuGet\Catel.ReSharper.nuspec</FileIn>
-			<FileOut>%PROJDIR%\..\..\output\NuGet\Catel.ReSharper.nuspec</FileOut>
+			<FileIn>%PROJDIR%\..\..\output\NuGet\8.0-8.2\Catel.ReSharper.nuspec</FileIn>
+			<FileOut>%PROJDIR%\..\..\output\NuGet\8.0-8.2\Catel.ReSharper.nuspec</FileOut>
 			<Find>%%VERSION_NUMBER%%</Find>
 			<NoModS type='11'>-1</NoModS>
 			<Replace>%PACKAGE_VERSION%</Replace>
@@ -434,8 +434,8 @@
 			<name>Get current year</name>
 		</step>
 		<step action='Replace in File'>
-			<FileIn>%PROJDIR%\..\..\output\NuGet\Catel.ReSharper.nuspec</FileIn>
-			<FileOut>%PROJDIR%\..\..\output\NuGet\Catel.ReSharper.nuspec</FileOut>
+			<FileIn>%PROJDIR%\..\..\output\NuGet\8.0-8.2\Catel.ReSharper.nuspec</FileIn>
+			<FileOut>%PROJDIR%\..\..\output\NuGet\8.0-8.2\Catel.ReSharper.nuspec</FileOut>
 			<Find>%%CURRENT_YEAR%%</Find>
 			<NoModS type='11'>-1</NoModS>
 			<Replace>%CURRENT_YEAR%</Replace>
@@ -481,7 +481,7 @@
 		<step action='Copy Files'>
 			<Converted type='11'>-1</Converted>
 			<Delay>15</Delay>
-			<DestDir>%PROJDIR%\..\..\output\nuget\ReSharper\v%RESHARPER_VERSION%\vs%VS_VERSION%\plugins</DestDir>
+			<DestDir>%PROJDIR%\..\..\output\nuget\8.0-8.2\ReSharper\v%RESHARPER_VERSION%\vs%VS_VERSION%\plugins</DestDir>
 			<Ext>*.dll</Ext>
 			<Incremental type='11'>-1</Incremental>
 			<LogCopied type='11'>-1</LogCopied>
@@ -497,8 +497,8 @@
 		<step action='NuGet'>
 			<Command>pack</Command>
 			<Exe>c:\Apps\dos-utils\NuGet.exe</Exe>
-			<OutputDirectory>%PROJDIR%\..\..\output\NuGet\</OutputDirectory>
-			<PackageId>%PROJDIR%\..\..\output\NuGet\Catel.ReSharper.nuspec</PackageId>
+			<OutputDirectory>%PROJDIR%\..\..\output\NuGet\8.0-8.2\</OutputDirectory>
+			<PackageId>%PROJDIR%\..\..\output\NuGet\8.0-8.2\Catel.ReSharper.nuspec</PackageId>
 			<buildfailsteps type='11'>0</buildfailsteps>
 			<indent type='3'>2</indent>
 			<name>NuGet</name>
