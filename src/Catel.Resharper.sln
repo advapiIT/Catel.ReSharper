@@ -33,6 +33,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{FBECC8
 		.nuget\packages.config = .nuget\packages.config
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catel.Resharper.R91", "Catel.Resharper.R91\Catel.Resharper.R91.csproj", "{C68546C1-BBFC-43E1-9C28-9152AB797285}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -67,6 +69,10 @@ Global
 		{89E6D457-C747-4D55-B5A3-ED0B51C3D300}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{89E6D457-C747-4D55-B5A3-ED0B51C3D300}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{89E6D457-C747-4D55-B5A3-ED0B51C3D300}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C68546C1-BBFC-43E1-9C28-9152AB797285}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C68546C1-BBFC-43E1-9C28-9152AB797285}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C68546C1-BBFC-43E1-9C28-9152AB797285}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C68546C1-BBFC-43E1-9C28-9152AB797285}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -79,5 +85,6 @@ Global
 		{20034B76-19A9-4D3B-8FC5-5AB4FF002D97} = {EFD27AC9-C61B-4774-8667-E481EDB79F5B}
 		{7BD7FE56-7DDB-48C4-B21E-1B75457E577A} = {EFD27AC9-C61B-4774-8667-E481EDB79F5B}
 		{89E6D457-C747-4D55-B5A3-ED0B51C3D300} = {EFD27AC9-C61B-4774-8667-E481EDB79F5B}
+		{C68546C1-BBFC-43E1-9C28-9152AB797285} = {EFD27AC9-C61B-4774-8667-E481EDB79F5B}
 	EndGlobalSection
 EndGlobal
