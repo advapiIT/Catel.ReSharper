@@ -8,7 +8,8 @@ namespace Catel.ReSharper.Identifiers
     using Catel.ReSharper.Helpers;
 
     using JetBrains.ReSharper.Psi;
-#if R80
+
+#if R80 || R81 || R82 || R90
     using JetBrains.Metadata.Reader.API;
     using JetBrains.ReSharper.Psi.Modules;
 #endif
@@ -32,7 +33,7 @@ namespace Catel.ReSharper.Identifiers
         /// The view model to model attribute.
         /// </summary>
         public const string ViewModelToModelAttribute = "Catel.MVVM.ViewModelToModelAttribute";
-#if R80
+#if R80 || R81 || R82 || R90
         /// <summary>
         /// The try get view model to model attribute type element.
         /// </summary>

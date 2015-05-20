@@ -11,6 +11,10 @@ namespace Catel.ReSharper.CatelProperties.CSharp.Actions
     using Catel.ReSharper.Identifiers;
 
     using JetBrains.Application;
+#if R90
+    using JetBrains.ReSharper.Resources.Shell;
+    using JetBrains.ReSharper.Feature.Services.CSharp.Analyses.Bulbs;
+#endif
     using JetBrains.ReSharper.Feature.Services.CSharp.Bulbs;
     using JetBrains.ReSharper.Psi;
     using JetBrains.ReSharper.Psi.CSharp.Tree;
@@ -85,7 +89,7 @@ namespace Catel.ReSharper.CatelProperties.CSharp.Actions
                     {
                         this.ClassDeclaration = this.FieldDeclaration.Parent.Parent.Parent as IClassDeclaration;
                         ITypeElement classDeclaredElement = this.ClassDeclaration.DeclaredElement;
-#if R80
+#if R80 || R81 || R82 || R90
                         if (classDeclaredElement != null && (classDeclaredElement.IsDescendantOf(CatelCore.GetDataObjectBaseTypeElement(this.Provider.PsiModule, selectedElement.GetResolveContext())) || classDeclaredElement.IsDescendantOf(CatelCore.GetModelBaseTypeElement(this.Provider.PsiModule, selectedElement.GetResolveContext()))) && (this.FieldDeclaration.IsStatic && this.FieldDeclaration.Initial is IExpressionInitializer))
 #else
                         if (classDeclaredElement != null && (classDeclaredElement.IsDescendantOf(CatelCore.GetDataObjectBaseTypeElement(this.Provider.PsiModule)) || classDeclaredElement.IsDescendantOf(CatelCore.GetModelBaseTypeElement(this.Provider.PsiModule))) && (this.FieldDeclaration.IsStatic && this.FieldDeclaration.Initial is IExpressionInitializer))

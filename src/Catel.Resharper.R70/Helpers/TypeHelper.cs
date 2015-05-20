@@ -6,7 +6,7 @@
 namespace Catel.ReSharper.Helpers
 {
     using JetBrains.ReSharper.Psi;
-#if R80
+#if R80 || R81 || R82 || R90
     using JetBrains.Metadata.Reader.API;
     using JetBrains.ReSharper.Psi.Modules;
 #endif
@@ -16,7 +16,7 @@ namespace Catel.ReSharper.Helpers
     /// </summary>
     internal static class TypeHelper
     {
-#if R80
+#if R80 || R81 || R82 || R90
         /// <summary>
         /// The try get type element.
         /// </summary>

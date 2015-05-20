@@ -40,7 +40,7 @@ namespace Catel.ReSharper.CatelProperties.CSharp.Builders
 
         #region Public Methods and Operators
 
-#if R70 || R71 || R80
+#if R70 || R71 || R80 || R81 || R82 ||R90
     
         /// <summary>
         /// The process.

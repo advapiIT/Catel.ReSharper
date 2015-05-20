@@ -5,7 +5,11 @@
 // --------------------------------------------------------------------------------------------------------------------
 namespace Catel.ReSharper.CSharp
 {
-#if R70 || R71 || R80
+#if R90
+    using JetBrains.ReSharper.Feature.Services.CSharp.Analyses.Bulbs;
+#endif
+
+#if R70 || R71 || R80 || R81 || R82
     using JetBrains.ReSharper.Feature.Services.CSharp.Bulbs;
 
 #elif R61
@@ -17,8 +21,10 @@ namespace Catel.ReSharper.CSharp
     /// <summary>
     /// The action base.
     /// </summary>
-    public abstract class ContextActionBase :
-#if R70 || R71 || R80
+    public abstract class ContextActionBase : 
+#if R90
+        JetBrains.ReSharper.Feature.Services.ContextActions.ContextActionBase
+#elif R70 || R71 || R80 || R81 || R82 
         JetBrains.ReSharper.Intentions.Extensibility.ContextActionBase
 #elif R61
         BulbItemImpl, IContextAction

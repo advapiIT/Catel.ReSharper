@@ -13,9 +13,12 @@ namespace Catel.ReSharper.CatelProperties.Workflows
     using JetBrains.ProjectModel;
     using JetBrains.ReSharper.Feature.Services.Generate;
     using JetBrains.ReSharper.Feature.Services.Generate.Actions;
+#if R90
+    using JetBrains.ReSharper.Feature.Services.Generate.UI.New;
+#endif
     using JetBrains.ReSharper.Psi;
 
-#if R70 || R71 || R80
+#if R70 || R71 || R80 || R81 || R82 || R90
     using JetBrains.UI.Icons;
 #elif R61
     using System.Drawing;
@@ -50,7 +53,7 @@ namespace Catel.ReSharper.CatelProperties.Workflows
 
         #region Constructors and Destructors
 
-#if R70 || R71 || R80
+#if R70 || R71 || R80 || R81 || R82 || R90
 
         /// <summary>
         /// Initializes a new instance of the <see cref="GeneratePropertyDataWorkflow"/> class. 

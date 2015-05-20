@@ -10,7 +10,9 @@
 using System.Reflection;
 
 using JetBrains.ActionManagement;
+#if !R90
 using JetBrains.Application.PluginSupport;
+#endif
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
@@ -23,11 +25,13 @@ using JetBrains.Application.PluginSupport;
 [assembly: AssemblyCopyright("Copyright © Catel development team, 2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
-[assembly: AssemblyVersion("1.4.0.0")]
-[assembly: AssemblyInformationalVersion("1.4.0.0")]
+[assembly: AssemblyVersion("1.0.0.31")]
+[assembly: AssemblyInformationalVersion("1.0.0.31")]
 [assembly: ActionsXml("Catel.ReSharper.Actions.xml")]
 
+#if !R90
 // The following information is displayed by ReSharper in the Plugins dialog
 [assembly: PluginTitle("Catel.ReSharper")]
 [assembly: PluginDescription("ReSharper plugin for Catel")]
 [assembly: PluginVendor("Catel development team")]
+#endif

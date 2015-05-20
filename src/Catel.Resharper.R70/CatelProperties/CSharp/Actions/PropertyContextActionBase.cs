@@ -13,7 +13,16 @@ namespace Catel.ReSharper.CatelProperties.CSharp.Actions
 
     using JetBrains.Application;
     using JetBrains.Application.Progress;
+    using JetBrains.Metadata.Reader.API;
     using JetBrains.ProjectModel;
+#if R81 || R82 || R90
+    using JetBrains.Metadata.Reader.API;
+#endif
+
+#if R90
+    using JetBrains.ReSharper.Resources.Shell;
+    using JetBrains.ReSharper.Feature.Services.CSharp.Analyses.Bulbs;
+#endif
     using JetBrains.ReSharper.Feature.Services.CSharp.Bulbs;
     using JetBrains.ReSharper.Psi;
     using JetBrains.ReSharper.Psi.CSharp.Tree;
@@ -77,13 +86,13 @@ namespace Catel.ReSharper.CatelProperties.CSharp.Actions
         /// </returns>
         public override sealed bool IsAvailable(IUserDataHolder cache)
         {
-#if R8
+#if R80 || R81 || R82 || R90
             IModuleReferenceResolveContext moduleReferenceResolveContext;
 #endif
             using (ReadLockCookie.Create())
             {
                 ITreeNode selectedElement = this.Provider.SelectedElement;
-#if R8
+#if R80 || R81 || R82 || R90
                 moduleReferenceResolveContext = selectedElement.GetResolveContext();
 #endif
                 if (selectedElement != null && selectedElement.Parent is IPropertyDeclaration)
@@ -96,7 +105,7 @@ namespace Catel.ReSharper.CatelProperties.CSharp.Actions
                     }
                 }
             }
-#if R80
+#if R80 || R81 || R82 || R90
             return this.classDeclaration != null && this.classDeclaration.DeclaredElement != null
                    && (this.classDeclaration.DeclaredElement.IsDescendantOf(CatelCore.GetDataObjectBaseTypeElement(this.Provider.PsiModule, classDeclaration.GetResolveContext()))
                        || this.classDeclaration.DeclaredElement.IsDescendantOf(CatelCore.GetModelBaseTypeElement(this.Provider.PsiModule, classDeclaration.GetResolveContext())));

@@ -7,8 +7,13 @@ namespace Catel.ReSharper.Types
 {
     using Catel.ReSharper.Identifiers;
 
+#if R90
+    using JetBrains.ReSharper.Feature.Services.ContextActions;
+    using JetBrains.ReSharper.Feature.Services.CSharp.Analyses.Bulbs;
+#else
     using JetBrains.ReSharper.Feature.Services.Bulbs;
     using JetBrains.ReSharper.Feature.Services.CSharp.Bulbs;
+#endif
 
     /// <summary>
     ///     The convert to data object base action.

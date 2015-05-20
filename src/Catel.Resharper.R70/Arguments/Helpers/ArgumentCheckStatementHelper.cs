@@ -8,10 +8,13 @@ namespace Catel.ReSharper.Arguments.Helpers
     using Catel.ReSharper.Arguments.Patterns;
     using Catel.ReSharper.Identifiers;
 
+#if R90
+    using JetBrains.ReSharper.Feature.Services.CSharp.Analyses.Bulbs;
+#endif
     using JetBrains.ReSharper.Feature.Services.CSharp.Bulbs;
     using JetBrains.ReSharper.Psi;
     using JetBrains.ReSharper.Psi.CSharp.Tree;
-#if R80
+#if R80 || R81 || R82 || R90
     using JetBrains.ReSharper.Psi.Tree;
 #endif
 
@@ -236,7 +239,7 @@ namespace Catel.ReSharper.Arguments.Helpers
             Argument.IsNotNullOrWhitespace(() => pattern);
             Argument.IsNotNull(() => parameterDeclaration);
 
-#if R80
+#if R80 || R81 || R82 || R90
             IDeclaredType catelArgumentType = TypeFactory.CreateTypeByCLRName(CatelCore.Argument, provider.PsiModule, provider.SelectedElement.GetResolveContext());
 #else
             IDeclaredType catelArgumentType = TypeFactory.CreateTypeByCLRName(CatelCore.Argument, provider.PsiModule);

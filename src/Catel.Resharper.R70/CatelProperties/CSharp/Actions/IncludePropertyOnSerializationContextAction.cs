@@ -9,8 +9,14 @@ namespace Catel.ReSharper.CatelProperties.CSharp.Actions
 
     using JetBrains.Application.Progress;
     using JetBrains.ProjectModel;
+#if R90
+    using JetBrains.ReSharper.Feature.Services.ContextActions;
+    using JetBrains.ReSharper.Feature.Services.CSharp.Analyses.Bulbs;
+#else
     using JetBrains.ReSharper.Feature.Services.Bulbs;
     using JetBrains.ReSharper.Feature.Services.CSharp.Bulbs;
+#endif
+
     using JetBrains.ReSharper.Psi.CSharp.Parsing;
     using JetBrains.ReSharper.Psi.CSharp.Tree;
     using JetBrains.TextControl;
