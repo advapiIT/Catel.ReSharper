@@ -6,6 +6,8 @@
 
 namespace Catel.ReSharper
 {
+    using System;
+
     using Catel.Logging;
     using JetBrains.Util;
 
@@ -29,24 +31,23 @@ namespace Catel.ReSharper
         #endregion
 
         #region Public Methods and Operators
-        
 
-        public override void Debug(ILog log, string message)
+        protected override void Debug(ILog log, string message, object extraData, LogData logData, DateTime time)
         {
             Logger.LogMessage(message);
         }
 
-        public override void Error(ILog log, string message)
-        {
-            Logger.LogError(message);
-        }
-
-        public override void Info(ILog log, string message)
+        protected override void Info(ILog log, string message, object extraData, LogData logData, DateTime time)
         {
             Logger.LogMessage(message);
         }
 
-        public override void Warning(ILog log, string message)
+        protected override void Warning(ILog log, string message, object extraData, LogData logData, DateTime time)
+        {
+            Logger.LogMessage(message);
+        }
+
+        protected override void Error(ILog log, string message, object extraData, LogData logData, DateTime time)
         {
             Logger.LogMessage(message);
         }
