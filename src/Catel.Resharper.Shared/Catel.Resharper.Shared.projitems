@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>f373d7b9-4440-4051-9d1d-3d7c85260c5b</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>Catel.ReSharper</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)..\SolutionAssemblyInfo.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AboutAction.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Arguments\ArgumentContextActionBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Arguments\Helpers\ArgumentCheckStatementDetectionHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Arguments\Helpers\ArgumentCheckStatementHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Arguments\Helpers\ExceptionXmlDocDetectionHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Arguments\Helpers\ExceptionXmlDocHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Arguments\ImplementsInterfaceContextAction.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Arguments\IsMatchContextAction.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Arguments\IsMaximumContextAction.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Arguments\IsMinimalContextAction.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Arguments\IsNotMatchContextAction.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Arguments\IsNotNullContextAction.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Arguments\IsNotNullOrEmptyArrayContextAction.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Arguments\IsNotNullOrEmptyContextAction.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Arguments\IsNotNullOrWhitespaceContextAction.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Arguments\IsNotOutOfRangeContextAction.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Arguments\IsOfTypeContextAction.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Arguments\Patterns\ArgumentCheckStatementDetectionPatterns.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Arguments\Patterns\ArgumentCheckStatementPatterns.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Arguments\Patterns\ExceptionXmlDocDectectionPatterns.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Arguments\Patterns\ExceptionXmlDocPatterns.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CatelProperties\Actions\ExposeModelPropertyDataAction.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CatelProperties\Actions\GeneratePropertyDataAction.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CatelProperties\CSharp\Actions\ConvertPropertyContextAction0.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CatelProperties\CSharp\Actions\ConvertPropertyContextAction1.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CatelProperties\CSharp\Actions\ConvertPropertyContextAction2.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CatelProperties\CSharp\Actions\ExcludePropertyFromSerializationContextAction.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CatelProperties\CSharp\Actions\FieldContextActionBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CatelProperties\CSharp\Actions\HideModelPropertyContextAction.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CatelProperties\CSharp\Actions\IncludePropertyOnSerializationContextAction.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CatelProperties\CSharp\Actions\PropertyContextActionBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CatelProperties\CSharp\Actions\RevertToAutoPropertyContextAction.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CatelProperties\CSharp\Builders\DataObjectBaseOrModelBasePropertyDataBuilder.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CatelProperties\CSharp\Builders\PropertyDataBuilderBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CatelProperties\CSharp\Builders\ViewModelBaseModelPropertyDataBuilder.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CatelProperties\CSharp\Extensions\ClassLikeDeclarationExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CatelProperties\CSharp\Extensions\PropertyDeclarationExtension.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CatelProperties\CSharp\Helpers\RegisterPropertyExpressionHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CatelProperties\CSharp\Patterns\DocumentationPatterns.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CatelProperties\CSharp\Patterns\ImplementationPatterns.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CatelProperties\CSharp\PropertyConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CatelProperties\CSharp\Providers\DataObjectBaseOrModelBasePropertyProvider.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CatelProperties\CSharp\Providers\ViewModelBaseModelPropertyProvider.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CatelProperties\Patterns\NamePatterns.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CatelProperties\Providers\ExposeModelPropertyDataItemProvider.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CatelProperties\Providers\GeneratePropertyDataItemProvider.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CatelProperties\WellKnownGenerationActionKinds.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CatelProperties\Workflows\ExposeModelPropertyDataWorkflow.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CatelProperties\Workflows\GeneratePropertyDataWorkflow.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CSharp\ContextActionBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\DictionaryWithKeyStringOfListOfTextRangeOrDocumentRangeExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\ITreeNodeExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\TypeHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Identifiers\CatelCore.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Identifiers\CatelMVVM.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Logging\LoggerListener.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ModuleInitializer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Properties\AssemblyInfo.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Types\InheritFromActionBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Types\InheritFromDataObjectBaseAction.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Types\InheritFromModelBaseAction.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Types\InheritFromViewModelBaseAction.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)packages.config" />
+    <None Include="$(MSBuildThisFileDirectory)Settings.StyleCop" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Actions.xml" />
+  </ItemGroup>
+</Project>
