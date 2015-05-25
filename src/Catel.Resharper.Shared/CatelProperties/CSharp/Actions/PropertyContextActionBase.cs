@@ -29,43 +29,21 @@ namespace Catel.ReSharper.CatelProperties.CSharp.Actions
     using JetBrains.ReSharper.Psi.Tree;
     using JetBrains.TextControl;
     using JetBrains.Util;
-
-    /// <summary>
-    ///     The property context action base.
-    /// </summary>
     public abstract class PropertyContextActionBase : ContextActionBase
     {
         #region Static Fields
-
-        /// <summary>
-        ///     The log.
-        /// </summary>
         private static readonly ILog Log = LogManager.GetCurrentClassLogger();
 
         #endregion
 
         #region Fields
+        private IPropertyDeclaration _propertyDeclaration;
 
-        /// <summary>
-        ///     Gets the property declaration.
-        /// </summary>
-        private IPropertyDeclaration propertyDeclaration;
-
-        /// <summary>
-        ///     Gets the class declaration.
-        /// </summary>
-        private IClassDeclaration classDeclaration;
+        private IClassDeclaration _classDeclaration;
 
         #endregion
 
         #region Constructors and Destructors
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="PropertyContextActionBase"/> class.
-        /// </summary>
-        /// <param name="provider">
-        /// The provider.
-        /// </param>
         protected PropertyContextActionBase(ICSharpContextActionDataProvider provider)
             : base(provider)
         {
@@ -74,16 +52,6 @@ namespace Catel.ReSharper.CatelProperties.CSharp.Actions
         #endregion
 
         #region Public Methods and Operators
-
-        /// <summary>
-        /// Indicates whether the the action is available.
-        /// </summary>
-        /// <param name="cache">
-        /// The cache.
-        /// </param>
-        /// <returns>
-        /// <c>true</c> if the action is available, otherwise <c>false</c>.
-        /// </returns>
         public override sealed bool IsAvailable(IUserDataHolder cache)
         {
 #if R80 || R81 || R82 || R90
@@ -91,28 +59,28 @@ namespace Catel.ReSharper.CatelProperties.CSharp.Actions
 #endif
             using (ReadLockCookie.Create())
             {
-                ITreeNode selectedElement = this.Provider.SelectedElement;
+                ITreeNode selectedElement = Provider.SelectedElement;
 #if R80 || R81 || R82 || R90
                 moduleReferenceResolveContext = selectedElement.GetResolveContext();
 #endif
                 if (selectedElement != null && selectedElement.Parent is IPropertyDeclaration)
                 {
-                    this.propertyDeclaration = selectedElement.Parent as IPropertyDeclaration;
-                    if (this.propertyDeclaration.IsAuto && this.propertyDeclaration.Parent != null
-                        && this.propertyDeclaration.Parent.Parent is IClassDeclaration)
+                    _propertyDeclaration = selectedElement.Parent as IPropertyDeclaration;
+                    if (_propertyDeclaration.IsAuto && _propertyDeclaration.Parent != null
+                        && _propertyDeclaration.Parent.Parent is IClassDeclaration)
                     {
-                        this.classDeclaration = this.propertyDeclaration.Parent.Parent as IClassDeclaration;
+                        _classDeclaration = _propertyDeclaration.Parent.Parent as IClassDeclaration;
                     }
                 }
             }
 #if R80 || R81 || R82 || R90
-            return this.classDeclaration != null && this.classDeclaration.DeclaredElement != null
-                   && (this.classDeclaration.DeclaredElement.IsDescendantOf(CatelCore.GetDataObjectBaseTypeElement(this.Provider.PsiModule, classDeclaration.GetResolveContext()))
-                       || this.classDeclaration.DeclaredElement.IsDescendantOf(CatelCore.GetModelBaseTypeElement(this.Provider.PsiModule, classDeclaration.GetResolveContext())));
+            return _classDeclaration != null && _classDeclaration.DeclaredElement != null
+                   && (_classDeclaration.DeclaredElement.IsDescendantOf(CatelCore.GetDataObjectBaseTypeElement(Provider.PsiModule, _classDeclaration.GetResolveContext()))
+                       || _classDeclaration.DeclaredElement.IsDescendantOf(CatelCore.GetModelBaseTypeElement(Provider.PsiModule, _classDeclaration.GetResolveContext())));
 #else
-            return this.classDeclaration != null && this.classDeclaration.DeclaredElement != null
-                   && (this.classDeclaration.DeclaredElement.IsDescendantOf(CatelCore.GetDataObjectBaseTypeElement(this.Provider.PsiModule))
-                       || this.classDeclaration.DeclaredElement.IsDescendantOf(CatelCore.GetModelBaseTypeElement(this.Provider.PsiModule)));
+            return classDeclaration != null && classDeclaration.DeclaredElement != null
+                   && (classDeclaration.DeclaredElement.IsDescendantOf(CatelCore.GetDataObjectBaseTypeElement(Provider.PsiModule))
+                       || classDeclaration.DeclaredElement.IsDescendantOf(CatelCore.GetModelBaseTypeElement(Provider.PsiModule)));
 #endif
         }
 
@@ -120,37 +88,16 @@ namespace Catel.ReSharper.CatelProperties.CSharp.Actions
 
         #region Methods
 
-        /// <summary>
-        /// The modify class body.
-        /// </summary>
-        /// <param name="propertyConverter">
-        /// The property Converter.
-        /// </param>
-        /// <param name="propertyDeclaration">
-        /// The property declaration.
-        /// </param>
         protected abstract void ConvertProperty(
             PropertyConverter propertyConverter, IPropertyDeclaration propertyDeclaration);
 
-        /// <summary>
-        /// The execute psi transaction.
-        /// </summary>
-        /// <param name="solution">
-        /// The solution.
-        /// </param>
-        /// <param name="progress">
-        /// The progress.
-        /// </param>
-        /// <returns>
-        /// Returns <c>null</c> or Nothing
-        /// </returns>
         protected override Action<ITextControl> ExecutePsiTransaction(ISolution solution, IProgressIndicator progress)
         {
             using (WriteLockCookie.Create())
             {
-                this.ConvertProperty(
-                    new PropertyConverter(this.Provider.ElementFactory, this.Provider.PsiModule, this.classDeclaration), 
-                    this.propertyDeclaration);
+                ConvertProperty(
+                    new PropertyConverter(Provider.ElementFactory, Provider.PsiModule, _classDeclaration), 
+                    _propertyDeclaration);
             }
 
             return null;

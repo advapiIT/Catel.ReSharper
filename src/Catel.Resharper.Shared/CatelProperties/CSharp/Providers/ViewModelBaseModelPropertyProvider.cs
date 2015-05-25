@@ -30,16 +30,9 @@ namespace Catel.ReSharper.CatelProperties.CSharp.Providers
     [GeneratorElementProvider(WellKnownGenerationActionKinds.ExposeModelPropertiesAsCatelDataProperties, typeof(CSharpLanguage))]
     public class ViewModelBaseModelPropertyProvider : GeneratorProviderBase<CSharpGeneratorContext>
     {
-        /// <summary>
-        /// The log.
-        /// </summary>
         private static readonly ILog Log = LogManager.GetCurrentClassLogger();
 
         #region Public Properties
-
-        /// <summary>
-        /// Gets Priority.
-        /// </summary>
         public override double Priority
         {
             get { return 0; }
@@ -47,28 +40,20 @@ namespace Catel.ReSharper.CatelProperties.CSharp.Providers
         #endregion
 
         #region Public Methods and Operators
-
-        /// <summary>
-        /// The populate.
-        /// </summary>
-        /// <param name="context">
-        /// The context.
-        /// </param>
-        /// <exception cref="System.ArgumentNullException">The <paramref name="context"/> is <c>null</c>.</exception>
         public override void Populate(CSharpGeneratorContext context)
         {
             Argument.IsNotNull(() => context);
 
             if (context.Anchor.Parent != null && context.Anchor.Parent.Parent is IClassLikeDeclaration)
             {
-                IClassLikeDeclaration classLikeDeclaration = context.ClassDeclaration;
-                ITypeElement declaredElement = classLikeDeclaration.DeclaredElement;
+                var classLikeDeclaration = context.ClassDeclaration;
+                var declaredElement = classLikeDeclaration.DeclaredElement;
 #if R80 || R81 || R82 || R90
 
                 var moduleReferenceResolveContext = context.Anchor.GetResolveContext();
-                ITypeElement viewModelBaseElement = TypeFactory.CreateTypeByCLRName(CatelMVVM.ViewModelBase, context.PsiModule, moduleReferenceResolveContext).GetTypeElement();
+                var viewModelBaseElement = TypeFactory.CreateTypeByCLRName(CatelMVVM.ViewModelBase, context.PsiModule, moduleReferenceResolveContext).GetTypeElement();
 #else
-                ITypeElement viewModelBaseElement = TypeFactory.CreateTypeByCLRName(CatelMVVM.ViewModelBase, context.PsiModule).GetTypeElement();
+                var viewModelBaseElement = TypeFactory.CreateTypeByCLRName(CatelMVVM.ViewModelBase, context.PsiModule).GetTypeElement();
 #endif
                 if (declaredElement is IClass && declaredElement.IsDescendantOf(viewModelBaseElement))
                 {

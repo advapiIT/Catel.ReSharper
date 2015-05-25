@@ -21,43 +21,23 @@ namespace Catel.ReSharper.CatelProperties.CSharp.Actions
     using JetBrains.ReSharper.Psi.CSharp.Tree;
     using JetBrains.TextControl;
 
-    /// <summary>
-    ///     The remove property context action.
-    /// </summary>
     [ContextAction(Name = Name, Group = "C#", Description = Description, Priority = -22)]
     public sealed class IncludePropertyOnSerializationContextAction : FieldContextActionBase
     {
         #region Constants
-
-        /// <summary>
-        /// The description.
-        /// </summary>
         private const string Description = "IncludePropertyOnSerializationContextActionDescription";
 
-        /// <summary>
-        /// The name.
-        /// </summary>
         private const string Name = "IncludePropertyOnSerializationContextAction";
 
         #endregion
 
         #region Fields
 
-        /// <summary>
-        ///     The _invocation expression.
-        /// </summary>
-        private IInvocationExpression invocationExpression;
+        private IInvocationExpression _invocationExpression;
 
         #endregion
 
         #region Constructors and Destructors
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="IncludePropertyOnSerializationContextAction"/> class.
-        /// </summary>
-        /// <param name="provider">
-        /// The provider.
-        /// </param>
         public IncludePropertyOnSerializationContextAction(ICSharpContextActionDataProvider provider)
             : base(provider)
         {
@@ -66,10 +46,6 @@ namespace Catel.ReSharper.CatelProperties.CSharp.Actions
         #endregion
 
         #region Public Properties
-
-        /// <summary>
-        ///     Gets the text.
-        /// </summary>
         public override string Text
         {
             get
@@ -81,55 +57,36 @@ namespace Catel.ReSharper.CatelProperties.CSharp.Actions
         #endregion
 
         #region Methods
-
-        /// <summary>
-        /// The execute psi transaction.
-        /// </summary>
-        /// <param name="solution">
-        /// The solution.
-        /// </param>
-        /// <param name="progress">
-        /// The progress.
-        /// </param>
-        /// <returns>
-        /// The System.Action`1[T -&gt; JetBrains.TextControl.ITextControl].
-        /// </returns>
         protected override Action<ITextControl> ExecutePsiTransaction(ISolution solution, IProgressIndicator progress)
         {
-            if (this.invocationExpression.ArgumentList.Arguments.Count == 4)
+            if (_invocationExpression.ArgumentList.Arguments.Count == 4)
             {
-                this.invocationExpression.RemoveArgument(this.invocationExpression.ArgumentList.Arguments[3]);
+                _invocationExpression.RemoveArgument(_invocationExpression.ArgumentList.Arguments[3]);
             }
 
-            if (this.invocationExpression.ArgumentList.Arguments.Count == 3
-                && (this.invocationExpression.ArgumentList.Arguments[2].Value is ICSharpLiteralExpression)
-                && (this.invocationExpression.ArgumentList.Arguments[2].Value as ICSharpLiteralExpression).Literal.GetTokenType() == CSharpTokenType.NULL_KEYWORD)
+            if (_invocationExpression.ArgumentList.Arguments.Count == 3
+                && (_invocationExpression.ArgumentList.Arguments[2].Value is ICSharpLiteralExpression)
+                && (_invocationExpression.ArgumentList.Arguments[2].Value as ICSharpLiteralExpression).Literal.GetTokenType() == CSharpTokenType.NULL_KEYWORD)
             {
-                this.invocationExpression.RemoveArgument(this.invocationExpression.ArgumentList.Arguments[2]);
+                _invocationExpression.RemoveArgument(_invocationExpression.ArgumentList.Arguments[2]);
             }
 
             return null;
         }
 
-        /// <summary>
-        ///     Indicates whether the the action is available.
-        /// </summary>
-        /// <returns>
-        ///     <c>true</c> if is available, otherwise <c>false</c>.
-        /// </returns>
         protected override bool IsAvailable()
         {
-            var expressionInitializer = this.FieldDeclaration.Initial as IExpressionInitializer;
-            this.invocationExpression = null;
+            var expressionInitializer = FieldDeclaration.Initial as IExpressionInitializer;
+            _invocationExpression = null;
             if (expressionInitializer != null)
             {
-                this.invocationExpression = expressionInitializer.Value as IInvocationExpression;
+                _invocationExpression = expressionInitializer.Value as IInvocationExpression;
             }
 
-            return this.invocationExpression != null
-                   && (this.invocationExpression.ArgumentList.Arguments.Count == 4
-                       && ((this.invocationExpression.ArgumentList.Arguments[3].Value is ICSharpLiteralExpression)
-                           && (this.invocationExpression.ArgumentList.Arguments[3].Value as ICSharpLiteralExpression).Literal.GetTokenType() == CSharpTokenType.FALSE_KEYWORD));
+            return _invocationExpression != null
+                   && (_invocationExpression.ArgumentList.Arguments.Count == 4
+                       && ((_invocationExpression.ArgumentList.Arguments[3].Value is ICSharpLiteralExpression)
+                           && (_invocationExpression.ArgumentList.Arguments[3].Value as ICSharpLiteralExpression).Literal.GetTokenType() == CSharpTokenType.FALSE_KEYWORD));
         }
 
         #endregion

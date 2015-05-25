@@ -33,42 +33,21 @@ namespace Catel.ReSharper.Arguments
     using JetBrains.TextControl;
     using JetBrains.Util;
 
-    /// <summary>
-    ///     The argument context action base.
-    /// </summary>
     public abstract class ArgumentContextActionBase : ContextActionBase
     {
         #region Static Fields
-
-        /// <summary>
-        ///     The log.
-        /// </summary>
         private static readonly ILog Log = LogManager.GetCurrentClassLogger();
 
         #endregion
 
         #region Fields
+        private ICSharpFunctionDeclaration _methodDeclaration;
 
-        /// <summary>
-        ///     The method declaration.
-        /// </summary>
-        private ICSharpFunctionDeclaration methodDeclaration;
-
-        /// <summary>
-        ///     The parameter declaration.
-        /// </summary>
-        private IRegularParameterDeclaration parameterDeclaration;
+        private IRegularParameterDeclaration _parameterDeclaration;
 
         #endregion
 
         #region Constructors and Destructors
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ArgumentContextActionBase"/> class.
-        /// </summary>
-        /// <param name="provider">
-        /// The provider.
-        /// </param>
         protected ArgumentContextActionBase(ICSharpContextActionDataProvider provider)
             : base(provider)
         {
@@ -78,15 +57,6 @@ namespace Catel.ReSharper.Arguments
 
         #region Public Methods and Operators
 
-        /// <summary>
-        /// Gets the availability of the command.
-        /// </summary>
-        /// <param name="cache">
-        /// The cache.
-        /// </param>
-        /// <returns>
-        /// <c>true</c> whether the command is available, otherwise <c>false</c>.
-        /// </returns>
         public override sealed bool IsAvailable(IUserDataHolder cache)
         {
             using (ReadLockCookie.Create())
@@ -98,19 +68,19 @@ namespace Catel.ReSharper.Arguments
 #else
                     IDeclaredType catelArgumentType = TypeFactory.CreateTypeByCLRName(CatelCore.Argument, this.Provider.PsiModule);
 #endif
-                    this.parameterDeclaration = null;
-                    this.methodDeclaration = null;
+                    this._parameterDeclaration = null;
+                    this._methodDeclaration = null;
 
                     if (catelArgumentType.GetTypeElement() != null)
                     {
                         if (this.Provider.SelectedElement != null && this.Provider.SelectedElement.Parent is IRegularParameterDeclaration)
                         {
-                            this.parameterDeclaration = this.Provider.SelectedElement.Parent as IRegularParameterDeclaration;
-                            if (this.parameterDeclaration.Parent != null && this.parameterDeclaration.Parent != null
-                                && this.parameterDeclaration.Parent.Parent is ICSharpFunctionDeclaration)
+                            this._parameterDeclaration = this.Provider.SelectedElement.Parent as IRegularParameterDeclaration;
+                            if (this._parameterDeclaration.Parent != null && this._parameterDeclaration.Parent != null
+                                && this._parameterDeclaration.Parent.Parent is ICSharpFunctionDeclaration)
                             {
-                                this.methodDeclaration =
-                                    this.parameterDeclaration.Parent.Parent as ICSharpFunctionDeclaration;
+                                this._methodDeclaration =
+                                    this._parameterDeclaration.Parent.Parent as ICSharpFunctionDeclaration;
                             }
                         }
                     }
@@ -118,68 +88,19 @@ namespace Catel.ReSharper.Arguments
                 }
             }
 
-            return this.parameterDeclaration != null && this.IsArgumentTypeTheExpected(this.parameterDeclaration.Type)
-                   && this.methodDeclaration != null
-                   && !this.IsArgumentChecked(this.methodDeclaration, this.parameterDeclaration);
+            return this._parameterDeclaration != null && this.IsArgumentTypeTheExpected(this._parameterDeclaration.Type)
+                   && this._methodDeclaration != null
+                   && !this.IsArgumentChecked(this._methodDeclaration, this._parameterDeclaration);
         }
 
         #endregion
 
         #region Methods
-
-        /// <summary>
-        /// Gets the argument check statement.
-        /// </summary>
-        /// <param name="parameterDeclaration">
-        /// The parameter declaration.
-        /// </param>
-        /// <returns>
-        /// The argument check statement
-        /// </returns>
-        /// <remarks>
-        /// This method needs to be overridden
-        /// </remarks>
         protected abstract ICSharpStatement CreateArgumentCheckStatement(
             IRegularParameterDeclaration parameterDeclaration);
 
-        /// <summary>
-        /// Gets argument check xml doc line.
-        /// </summary>
-        /// <param name="parameterDeclaration">
-        /// The parameter declaration.
-        /// </param>
-        /// <returns>
-        /// The argument check xml doc line.
-        /// </returns>
-        /// <exception cref="InvalidOperationException">
-        /// Thrown when an error occurs.
-        /// </exception>
-        /// <remarks>
-        /// This method needs to be overridden
-        /// </remarks>
         protected abstract string CreateExceptionXmlDoc(IRegularParameterDeclaration parameterDeclaration);
 
-        /// <summary>
-        /// Executes QuickFix or ContextAction. Returns post-execute method.
-        /// </summary>
-        /// <param name="solution">
-        /// The solution.
-        /// </param>
-        /// <param name="progress">
-        /// The progress.
-        /// </param>
-        /// <returns>
-        /// Action to execute after document and PSI transaction finish. Use to open TextControls, navigate caret, etc.
-        /// </returns>
-        /// <exception cref="InvalidOperationException">
-        /// Thrown when an error occurs 
-        /// </exception>
-        /// <exception cref="System.ArgumentNullException">
-        /// The <paramref name="solution"/> is <c>null</c>.
-        /// </exception>
-        /// <exception cref="System.ArgumentNullException">
-        /// The <paramref name="progress"/> is <c>null</c>.
-        /// </exception>
         protected override Action<ITextControl> ExecutePsiTransaction(ISolution solution, IProgressIndicator progress)
         {
             Argument.IsNotNull(() => solution);
@@ -189,35 +110,35 @@ namespace Catel.ReSharper.Arguments
 #else
             IDocCommentBlock exceptionCommentBlock = null;
 #endif
-            XmlNode xmlDoc = this.methodDeclaration.GetXMLDoc(false);
-            if (xmlDoc == null || !this.IsArgumentCheckDocumented(xmlDoc, this.parameterDeclaration))
+            XmlNode xmlDoc = this._methodDeclaration.GetXMLDoc(false);
+            if (xmlDoc == null || !this.IsArgumentCheckDocumented(xmlDoc, this._parameterDeclaration))
             {
                 // TODO: Move out the initialization of the exception block down (CreateExceptionXmlDoc).
                 exceptionCommentBlock =
                     this.Provider.ElementFactory.CreateDocCommentBlock(
-                        this.CreateExceptionXmlDoc(this.parameterDeclaration));
+                        this.CreateExceptionXmlDoc(this._parameterDeclaration));
 
                 // TODO: Detect the right position to insert the document node.
 #if !R90
-                if (this.methodDeclaration.FirstChild is IDocCommentBlockNode)
+                if (this._methodDeclaration.FirstChild is IDocCommentBlockNode)
 #else
-                if (this.methodDeclaration.FirstChild is IDocCommentBlock)
+                if (this._methodDeclaration.FirstChild is IDocCommentBlock)
 #endif
                 {
-                    ITreeNode lastChild = this.methodDeclaration.FirstChild.LastChild;
+                    ITreeNode lastChild = this._methodDeclaration.FirstChild.LastChild;
                     if (lastChild != null)
                     {
                         exceptionCommentBlock = ModificationUtil.AddChildAfter(lastChild, exceptionCommentBlock);
                     }
                 }
-                else if (this.methodDeclaration.Parent != null)
+                else if (this._methodDeclaration.Parent != null)
                 {
-                    exceptionCommentBlock = ModificationUtil.AddChildBefore(this.methodDeclaration.Parent, this.methodDeclaration.FirstChild, exceptionCommentBlock);
+                    exceptionCommentBlock = ModificationUtil.AddChildBefore(this._methodDeclaration.Parent, this._methodDeclaration.FirstChild, exceptionCommentBlock);
                 }
             }
 
             // TODO: Detect the right position to insert the code.
-            ITreeNode methodBodyFirstChild = this.methodDeclaration.Body.FirstChild;
+            ITreeNode methodBodyFirstChild = this._methodDeclaration.Body.FirstChild;
 #if R81 || R82 || R90
             Dictionary<string, List<DocumentRange>> fields = null;
 #else
@@ -225,7 +146,7 @@ namespace Catel.ReSharper.Arguments
 #endif
             if (methodBodyFirstChild != null)
             {
-                ICSharpStatement checkStatement = ModificationUtil.AddChildAfter(methodBodyFirstChild, this.CreateArgumentCheckStatement(this.parameterDeclaration));
+                ICSharpStatement checkStatement = ModificationUtil.AddChildAfter(methodBodyFirstChild, this.CreateArgumentCheckStatement(this._parameterDeclaration));
                 fields = checkStatement.GetFields();
                 if (exceptionCommentBlock != null)
                 {
@@ -250,52 +171,10 @@ namespace Catel.ReSharper.Arguments
                        };
         }
 
-        /// <summary>
-        /// The is argument check documented.
-        /// </summary>
-        /// <param name="xmlDocOfTheMethod">
-        /// The xml Doc Of The Method.
-        /// </param>
-        /// <param name="parameterDeclaration">
-        /// The parameter declaration.
-        /// </param>
-        /// <returns>
-        /// <c>true</c> whether the <paramref name="xmlDocOfTheMethod"/> is <c>null</c>.
-        /// </returns>
-        /// <remarks>
-        /// This method needs to be overridden
-        /// </remarks>
         protected abstract bool IsArgumentCheckDocumented(XmlNode xmlDocOfTheMethod, IRegularParameterDeclaration parameterDeclaration);
 
-        /// <summary>
-        /// Gets is argument checked.
-        /// </summary>
-        /// <param name="methodDeclaration">
-        /// The method declaration.
-        /// </param>
-        /// <param name="parameterDeclaration">
-        /// The parameter declaration.
-        /// </param>
-        /// <returns>
-        /// The get is argument checked.
-        /// </returns>
-        /// <remarks>
-        /// This method needs to be overridden
-        /// </remarks>
         protected abstract bool IsArgumentChecked(ICSharpFunctionDeclaration methodDeclaration, IRegularParameterDeclaration parameterDeclaration);
 
-        /// <summary>
-        /// Gets a value indicating whether IsArgumentTypeCompatible.
-        /// </summary>
-        /// <param name="type">
-        /// The type.
-        /// </param>
-        /// <returns>
-        /// <c>true</c> if the argument type is of the expected type, otherwise <c>false</c>.
-        /// </returns>
-        /// <remarks>
-        /// This method needs to be overridden
-        /// </remarks>
         protected abstract bool IsArgumentTypeTheExpected(IType type);
 
         #endregion

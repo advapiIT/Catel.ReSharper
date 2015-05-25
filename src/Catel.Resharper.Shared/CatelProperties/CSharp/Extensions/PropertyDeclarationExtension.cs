@@ -3,7 +3,7 @@
 //   Copyright (c) 2008 - 2012 Catel development team. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
-namespace Catel.ReSharper.CatelProperties.CSharp.Extensions
+namespace Catel.ReSharper.CatelProperties.CSharp
 {
     using System.Text.RegularExpressions;
 

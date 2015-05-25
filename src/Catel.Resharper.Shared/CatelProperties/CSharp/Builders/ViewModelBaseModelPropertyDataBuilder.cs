@@ -33,61 +33,34 @@ namespace Catel.ReSharper.CatelProperties.CSharp.Builders
     using JetBrains.ReSharper.Psi.Modules;
     using JetBrains.ReSharper.Psi.Tree;
 #endif
+
     using JetBrains.ReSharper.Psi.Tree;
     using JetBrains.ReSharper.Psi.Util;
     using JetBrains.Util;
 
-    /// <summary>
-    /// The model property data builder.
-    /// </summary>
     [GeneratorBuilder(WellKnownGenerationActionKinds.ExposeModelPropertiesAsCatelDataProperties, typeof(CSharpLanguage))]
     internal sealed class ViewModelBaseModelPropertyDataBuilder : PropertyDataBuilderBase
     {
-        /// <summary>
-        /// The log.
-        /// </summary>
         private static readonly ILog Log = LogManager.GetCurrentClassLogger();
 
-        /// <summary>
-        /// Gets the priority.
-        /// </summary>
         public override double Priority
         {
             get { return 0; }
         }
 
 #if R70 || R71 || R80 || R81 || R82 ||R90
-
-        /// <summary>
-        /// The process.
-        /// </summary>
-        /// <param name="context">
-        /// The context.
-        /// </param>
-        /// <exception cref="System.ArgumentNullException">The <paramref name="context"/> is <c>null</c>.</exception>
         protected override void Process(CSharpGeneratorContext context)
-
 #elif R61
-
-        /// <summary>
-        /// The process.
-        /// </summary>
-        /// <param name="context">
-        /// The context.
-        /// </param>
-        /// <exception cref="System.ArgumentNullException">
-        /// The <paramref name="context"/> is <c>null</c>.
-        /// </exception>
         public override void Process(CSharpGeneratorContext context)
 #endif
         {
             Argument.IsNotNull(() => context);
 
-            CSharpElementFactory factory = CSharpElementFactory.GetInstance(context.Root.GetPsiModule());
+            var factory = CSharpElementFactory.GetInstance(context.Root.GetPsiModule());
 #if R80 || R81 || R82 || R90
-            IDeclaredType viewModelToModelAttributeClrType = TypeFactory.CreateTypeByCLRName(CatelMVVM.ViewModelToModelAttribute, context.PsiModule, UniversalModuleReferenceContext.Instance);
+            var viewModelToModelAttributeClrType = TypeFactory.CreateTypeByCLRName(CatelMVVM.ViewModelToModelAttribute, context.PsiModule, UniversalModuleReferenceContext.Instance);
 #else
-            IDeclaredType viewModelToModelAttributeClrType = TypeFactory.CreateTypeByCLRName(CatelMVVM.ViewModelToModelAttribute, context.PsiModule);
+            var viewModelToModelAttributeClrType = TypeFactory.CreateTypeByCLRName(CatelMVVM.ViewModelToModelAttribute, context.PsiModule);
 #endif
             List<GeneratorDeclaredElement> declaredElements = context.InputElements.OfType<GeneratorDeclaredElement>().ToList();
             IClassLikeDeclaration classLikeDeclaration = context.ClassDeclaration;

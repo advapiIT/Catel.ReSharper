@@ -8,7 +8,6 @@ namespace Catel.ReSharper.CatelProperties.CSharp.Actions
     using System;
     using System.Linq;
 
-    using Catel.ReSharper.CatelProperties.CSharp.Extensions;
     using Catel.ReSharper.Identifiers;
 
     using JetBrains.Application.Progress;
@@ -27,34 +26,17 @@ namespace Catel.ReSharper.CatelProperties.CSharp.Actions
 #endif
     using JetBrains.TextControl;
 
-    /// <summary>
-    ///     The remove property context action.
-    /// </summary>
     [ContextAction(Name = Name, Group = "C#", Description = Description, Priority = -23)]
     public sealed class HideModelPropertyContextAction : FieldContextActionBase
     {
         #region Constants
-
-        /// <summary>
-        /// The description.
-        /// </summary>
         private const string Description = "HideModelPropertyContextActionDescription";
 
-        /// <summary>
-        /// The name.
-        /// </summary>
         private const string Name = "HideModelPropertyContextAction";
 
         #endregion
 
         #region Constructors and Destructors
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="HideModelPropertyContextAction"/> class.
-        /// </summary>
-        /// <param name="provider">
-        /// The provider.
-        /// </param>
         public HideModelPropertyContextAction(ICSharpContextActionDataProvider provider)
             : base(provider)
         {
@@ -63,10 +45,6 @@ namespace Catel.ReSharper.CatelProperties.CSharp.Actions
         #endregion
 
         #region Public Properties
-
-        /// <summary>
-        ///     Gets the text.
-        /// </summary>
         public override string Text
         {
             get
@@ -78,43 +56,25 @@ namespace Catel.ReSharper.CatelProperties.CSharp.Actions
         #endregion
 
         #region Methods
-
-        /// <summary>
-        /// The execute psi transaction.
-        /// </summary>
-        /// <param name="solution">
-        /// The solution.
-        /// </param>
-        /// <param name="progress">
-        /// The progress.
-        /// </param>
-        /// <returns>
-        /// The System.Action`1[T -&gt; JetBrains.TextControl.ITextControl].
-        /// </returns>
         protected override Action<ITextControl> ExecutePsiTransaction(ISolution solution, IProgressIndicator progress)
         {
-            this.ClassDeclaration.RemoveClassMemberDeclaration(this.FieldDeclaration);
-            this.ClassDeclaration.RemoveClassMemberDeclaration(this.PropertyDeclaration);
+            ClassDeclaration.RemoveClassMemberDeclaration(FieldDeclaration);
+            ClassDeclaration.RemoveClassMemberDeclaration(PropertyDeclaration);
+
             return null;
         }
 
-        /// <summary>
-        ///     Indicates whether the the action is available.
-        /// </summary>
-        /// <returns>
-        ///     <c>true</c> if is available, otherwise <c>false</c>.
-        /// </returns>
         protected override bool IsAvailable()
         {
             ITypeElement typeElement;
             IAttribute viewModelToModelAttribute = null;
 #if R80 || R81 || R82 || R90
-            if (CatelMVVM.TryGetViewModelToModelAttributeTypeElement(this.Provider.PsiModule, this.Provider.SelectedElement.GetResolveContext(), out typeElement))
+            if (CatelMVVM.TryGetViewModelToModelAttributeTypeElement(Provider.PsiModule, Provider.SelectedElement.GetResolveContext(), out typeElement))
 #else
-            if (CatelMVVM.TryGetViewModelToModelAttributeTypeElement(this.Provider.PsiModule, out typeElement))
+            if (CatelMVVM.TryGetViewModelToModelAttributeTypeElement(Provider.PsiModule, out typeElement))
 #endif
             {
-                viewModelToModelAttribute = (from attribute in this.PropertyDeclaration.Attributes
+                viewModelToModelAttribute = (from attribute in PropertyDeclaration.Attributes
                                              where
                                                  attribute.TypeReference != null
                                                  && attribute.TypeReference.CurrentResolveResult != null
@@ -123,7 +83,7 @@ namespace Catel.ReSharper.CatelProperties.CSharp.Actions
                                              select attribute).FirstOrDefault();
             }
 
-            return viewModelToModelAttribute != null && this.PropertyDeclaration.HasDefaultCatelImplementation();
+            return viewModelToModelAttribute != null && PropertyDeclaration.HasDefaultCatelImplementation();
         }
 
         #endregion

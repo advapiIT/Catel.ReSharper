@@ -7,9 +7,8 @@ namespace Catel.ReSharper.Types
 {
     using System;
 
-    using Catel.ReSharper.CatelProperties.CSharp.Extensions;
     using Catel.ReSharper.CSharp;
-
+    using CatelProperties.CSharp;
     using JetBrains.Application;
     using JetBrains.Application.Progress;
     using JetBrains.ProjectModel;

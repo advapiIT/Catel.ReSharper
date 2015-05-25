@@ -20,22 +20,12 @@ namespace Catel.ReSharper.CatelProperties.CSharp
 #endif
     using JetBrains.Util;
 
-    /// <summary>
-    /// The c sharp view model base property provider.
-    /// </summary>
     [GeneratorElementProvider(WellKnownGenerationActionKinds.GenerateCatelDataProperties, typeof(CSharpLanguage))]
     public class DataObjectBaseOrModelBasePropertyProvider : GeneratorProviderBase<CSharpGeneratorContext>
     {
-        /// <summary>
-        /// The log.
-        /// </summary>
         private static readonly ILog Log = LogManager.GetCurrentClassLogger();
 
         #region Public Properties
-
-        /// <summary>
-        /// Gets Priority.
-        /// </summary>
         public override double Priority
         {
             get
@@ -46,22 +36,12 @@ namespace Catel.ReSharper.CatelProperties.CSharp
         #endregion
 
         #region Public Methods and Operators
-
-        /// <summary>
-        /// The populate.
-        /// </summary>
-        /// <param name="context">
-        /// The context.
-        /// </param>
-        /// <exception cref="System.ArgumentNullException">
-        /// The <paramref name="context"/> is <c>null</c>.
-        /// </exception>
         public override void Populate(CSharpGeneratorContext context)
         {
             Argument.IsNotNull(() => context);
 
-            IClassLikeDeclaration classLikeDeclaration = context.ClassDeclaration;
-            ITypeElement declaredElement = classLikeDeclaration.DeclaredElement;
+            var classLikeDeclaration = context.ClassDeclaration;
+            var declaredElement = classLikeDeclaration.DeclaredElement;
 #if R80 || R81 || R82 || R90
             if (declaredElement is IClass && (declaredElement.IsDescendantOf(CatelCore.GetDataObjectBaseTypeElement(context.PsiModule, classLikeDeclaration.GetResolveContext())) || declaredElement.IsDescendantOf(CatelCore.GetModelBaseTypeElement(context.PsiModule, classLikeDeclaration.GetResolveContext()))))
 #else
