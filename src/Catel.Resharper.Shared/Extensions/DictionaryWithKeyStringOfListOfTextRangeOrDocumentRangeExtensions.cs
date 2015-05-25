@@ -4,10 +4,11 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Catel.ReSharper.Extensions
+namespace Catel.ReSharper
 {
     using System.Collections.Generic;
     using System.Linq;
+
 #if R80
     using JetBrains.Util;
     using JetBrains.DocumentModel;
@@ -22,23 +23,10 @@ namespace Catel.ReSharper.Extensions
     using JetBrains.ReSharper.LiveTemplates;
     using JetBrains.Util;
 
-    /// <summary>
-    /// The extension method of Dictionary{string, List{TextRange}} or Dictionary{string, List{DocumentRange}}.
-    /// </summary>
     internal static class DictionaryWithKeyStringOfListOfTextRangeOrDocumentRangeExtensions
     {
         #region Public Methods and Operators
 #if R81 || R82 || R90
-        /// <summary>
-        /// Gets the hotspot information.
-        /// </summary>
-        /// <param name="this">
-        /// The instance.
-        /// </param>
-        /// <returns>
-        /// Hotspot information
-        /// </returns>
-        /// <exception cref="System.ArgumentNullException">The <paramref name="this"/> is <c>null</c>.</exception>
         public static HotspotInfo[] AsHotspotInfos(this Dictionary<string, List<DocumentRange>> @this)
         {
             Argument.IsNotNull(() => @this);
@@ -50,17 +38,6 @@ namespace Catel.ReSharper.Extensions
                     select new HotspotInfo(field, @this[fieldName])).ToArray();
         }
 #else
-
-        /// <summary>
-        /// Gets the hotspot information.
-        /// </summary>
-        /// <param name="this">
-        /// The instance.
-        /// </param>
-        /// <returns>
-        /// Hotspot information
-        /// </returns>
-        /// <exception cref="System.ArgumentNullException">The <paramref name="this"/> is <c>null</c>.</exception>
         public static HotspotInfo[] AsHotspotInfos(this Dictionary<string, List<TextRange>> @this)
         {
             Argument.IsNotNull(() => @this);
@@ -96,18 +73,6 @@ namespace Catel.ReSharper.Extensions
         }
 
 #else
-        /// <summary>
-        /// The merge.
-        /// </summary>
-        /// <param name="this">
-        /// The self instance.
-        /// </param>
-        /// <param name="fields">
-        /// The comment fields.
-        /// </param>
-        /// <exception cref="System.ArgumentNullException">
-        /// The <paramref name="this"/> is <c>null</c>.
-        /// </exception>
         public static void Merge(this Dictionary<string, List<TextRange>> @this, Dictionary<string, List<TextRange>> fields)
         {
             Argument.IsNotNull(() => @this);

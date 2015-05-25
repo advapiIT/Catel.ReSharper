@@ -18,9 +18,6 @@ namespace Catel.ReSharper.CSharp
     using JetBrains.Util;
 #endif
 
-    /// <summary>
-    /// The action base.
-    /// </summary>
     public abstract class ContextActionBase : 
 #if R90
         JetBrains.ReSharper.Feature.Services.ContextActions.ContextActionBase
@@ -30,15 +27,6 @@ namespace Catel.ReSharper.CSharp
         BulbItemImpl, IContextAction
 #endif
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ContextActionBase"/> class. 
-        /// </summary>
-        /// <param name="provider">
-        /// The provider.
-        /// </param>
-        /// <exception cref="System.ArgumentNullException">
-        /// The <paramref name="provider"/> is <c>null</c>.
-        /// </exception>
         protected ContextActionBase(ICSharpContextActionDataProvider provider)
         {
             Argument.IsNotNull(() => provider);
@@ -46,22 +34,9 @@ namespace Catel.ReSharper.CSharp
             Provider = provider;
         }
 
-        /// <summary>
-        /// Gets Provider.
-        /// </summary>
         protected ICSharpContextActionDataProvider Provider { get; private set; }
 
 #if R61
-    
-    /// <summary>
-    /// The is available.
-    /// </summary>
-    /// <param name="cache">
-    /// The cache.
-    /// </param>
-    /// <returns>
-    /// The System.Boolean.
-    /// </returns>
         public abstract bool IsAvailable(IUserDataHolder cache);
 #endif
     }

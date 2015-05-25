@@ -7,8 +7,8 @@
 namespace Catel.ReSharper
 {
     using Catel.Logging;
-
     using JetBrains.Util;
+
 #if R80 || R81 || R82 || R90
     using JetBrains.Util.Logging;
 #endif
@@ -19,10 +19,6 @@ namespace Catel.ReSharper
     public class LoggerListener : LogListenerBase
     {
         #region Constructors and Destructors
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="LoggerListener"/> class.
-        /// </summary>
         public LoggerListener()
         {
 #if DEBUG && !R90
@@ -33,58 +29,23 @@ namespace Catel.ReSharper
         #endregion
 
         #region Public Methods and Operators
+        
 
-        /// <summary>
-        /// Called when a <see cref="F:Catel.Logging.LogEvent.Debug"/> message is written to the log.
-        /// </summary>
-        /// <param name="log">
-        /// The log.
-        /// </param>
-        /// <param name="message">
-        /// The message.
-        /// </param>
         public override void Debug(ILog log, string message)
         {
             Logger.LogMessage(message);
         }
 
-        /// <summary>
-        /// Called when a <see cref="F:Catel.Logging.LogEvent.Error"/> message is written to the log.
-        /// </summary>
-        /// <param name="log">
-        /// The log.
-        /// </param>
-        /// <param name="message">
-        /// The message.
-        /// </param>
         public override void Error(ILog log, string message)
         {
             Logger.LogError(message);
         }
 
-        /// <summary>
-        /// Called when a <see cref="F:Catel.Logging.LogEvent.Info"/> message is written to the log.
-        /// </summary>
-        /// <param name="log">
-        /// The log.
-        /// </param>
-        /// <param name="message">
-        /// The message.
-        /// </param>
         public override void Info(ILog log, string message)
         {
             Logger.LogMessage(message);
         }
 
-        /// <summary>
-        /// Called when a <see cref="F:Catel.Logging.LogEvent.Warning"/> message is written to the log.
-        /// </summary>
-        /// <param name="log">
-        /// The log.
-        /// </param>
-        /// <param name="message">
-        /// The message.
-        /// </param>
         public override void Warning(ILog log, string message)
         {
             Logger.LogMessage(message);

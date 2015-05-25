@@ -23,20 +23,22 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\output\debug\v9.1\</OutputPath>
+    <OutputPath>..\..\output\debug\v91\</OutputPath>
     <DefineConstants>TRACE;DEBUG;JET_MODE_ASSERT;R90</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\..\output\debug\v9.1\Catel.ReSharper.xml</DocumentationFile>
+    <DocumentationFile>
+    </DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\..\output\Release\v9.1\</OutputPath>
+    <OutputPath>..\..\output\release\v91\</OutputPath>
     <DefineConstants>TRACE;JET_MODE_ASSERT;R91</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\..\output\Release\v9.1\Catel.ReSharper.xml</DocumentationFile>
+    <DocumentationFile>
+    </DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="antlr.runtime">

@@ -17,42 +17,12 @@ namespace Catel.ReSharper.Helpers
     internal static class TypeHelper
     {
 #if R80 || R81 || R82 || R90
-        /// <summary>
-        /// The try get type element.
-        /// </summary>
-        /// <param name="typeName">
-        /// The type name.
-        /// </param>
-        /// <param name="psiModule">
-        /// The psi module.
-        /// </param>
-        /// <param name="typeElement">
-        /// The type element.
-        /// </param>
-        /// <returns>
-        /// The System.Boolean.
-        /// </returns>
         public static bool TryGetTypeElement(string typeName, IPsiModule psiModule, IModuleReferenceResolveContext moduleReferenceResolveContext, out ITypeElement typeElement)
         {
             typeElement = TypeFactory.CreateTypeByCLRName(typeName, psiModule, moduleReferenceResolveContext).GetTypeElement();
             return typeElement != null;
         }
 #else
-        /// <summary>
-        /// The try get type element.
-        /// </summary>
-        /// <param name="typeName">
-        /// The type name.
-        /// </param>
-        /// <param name="psiModule">
-        /// The psi module.
-        /// </param>
-        /// <param name="typeElement">
-        /// The type element.
-        /// </param>
-        /// <returns>
-        /// The System.Boolean.
-        /// </returns>
         public static bool TryGetTypeElement(string typeName, IPsiModule psiModule, out ITypeElement typeElement)
         {
             typeElement = TypeFactory.CreateTypeByCLRName(typeName, psiModule).GetTypeElement();

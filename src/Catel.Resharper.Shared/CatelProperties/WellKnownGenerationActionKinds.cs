@@ -5,19 +5,10 @@
 // --------------------------------------------------------------------------------------------------------------------
 namespace Catel.ReSharper.CatelProperties
 {
-    /// <summary>
-    /// The well known generation action kinds.
-    /// </summary>
     internal static class WellKnownGenerationActionKinds
     {
-        /// <summary>
-        /// The expose model properties as data properties.
-        /// </summary>
         public const string ExposeModelPropertiesAsCatelDataProperties = "ExposeModelPropertiesAsCatelDataProperties";
 
-        /// <summary>
-        /// The generate data properties.
-        /// </summary>
         public const string GenerateCatelDataProperties = "GenerateCatelDataProperties";
     }
 }

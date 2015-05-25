@@ -6,7 +6,7 @@
     <SharedGUID>f373d7b9-4440-4051-9d1d-3d7c85260c5b</SharedGUID>
   </PropertyGroup>
   <PropertyGroup Label="Configuration">
-    <Import_RootNamespace>Catel.Resharper</Import_RootNamespace>
+    <Import_RootNamespace>Catel.ReSharper</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)..\SolutionAssemblyInfo.cs" />
@@ -56,7 +56,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)CatelProperties\Patterns\NamePatterns.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CatelProperties\Providers\ExposeModelPropertyDataItemProvider.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CatelProperties\Providers\GeneratePropertyDataItemProvider.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)CatelProperties\WellKnonwGenerationActionKinds.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CatelProperties\WellKnownGenerationActionKinds.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CatelProperties\Workflows\ExposeModelPropertyDataWorkflow.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CatelProperties\Workflows\GeneratePropertyDataWorkflow.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CSharp\ContextActionBase.cs" />
@@ -65,7 +65,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\TypeHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Identifiers\CatelCore.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Identifiers\CatelMVVM.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)LoggerListener.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Logging\LoggerListener.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ModuleInitializer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Properties\AssemblyInfo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Types\InheritFromActionBase.cs" />

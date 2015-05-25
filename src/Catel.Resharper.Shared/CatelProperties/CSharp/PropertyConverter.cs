@@ -19,58 +19,29 @@ namespace Catel.ReSharper.CatelProperties.CSharp
     using JetBrains.ReSharper.Psi.CSharp;
     using JetBrains.ReSharper.Psi.CSharp.Tree;
     using JetBrains.ReSharper.Psi.ExtensionsAPI.Tree;
+
 #if R80 || R81 || R82 || R90
     using JetBrains.ReSharper.Psi.Modules;
 #endif
     using JetBrains.ReSharper.Psi.Tree;
 
-    /// <summary>
-    ///     The property converter.
-    /// </summary>
     public class PropertyConverter
     {
         #region Static Fields
-
-        /// <summary>
-        ///     The log.
-        /// </summary>
         private static readonly ILog Log = LogManager.GetCurrentClassLogger();
 
         #endregion
 
         #region Fields
-
-        /// <summary>
-        ///     The class declaration.
-        /// </summary>
         private readonly IClassDeclaration classDeclaration;
 
-        /// <summary>
-        ///     The factory.
-        /// </summary>
         private readonly CSharpElementFactory factory;
 
-        /// <summary>
-        ///     The psi module.
-        /// </summary>
         private readonly IPsiModule psiModule;
 
         #endregion
 
         #region Constructors and Destructors
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="PropertyConverter"/> class.
-        /// </summary>
-        /// <param name="factory">
-        /// The factory.
-        /// </param>
-        /// <param name="psiModule">
-        /// The psi Module.
-        /// </param>
-        /// <param name="classDeclaration">
-        /// The class declaration.
-        /// </param>
         public PropertyConverter(CSharpElementFactory factory, IPsiModule psiModule, IClassDeclaration classDeclaration)
         {
             Argument.IsNotNull(() => factory);
@@ -85,28 +56,6 @@ namespace Catel.ReSharper.CatelProperties.CSharp
         #endregion
 
         #region Public Methods and Operators
-
-        /// <summary>
-        /// The convert.
-        /// </summary>
-        /// <param name="propertyDeclaration">
-        /// The property declaration.
-        /// </param>
-        /// <param name="includeInSerialization">
-        /// Includes the property in serialization
-        /// </param>
-        /// <param name="notificationMethod">
-        /// The notification method.
-        /// </param>
-        /// <param name="forwardEventArgument">
-        /// The forward event argument.
-        /// </param>
-        /// <exception cref="ArgumentException">
-        /// Thrown when the <paramref name="propertyDeclaration"/> is not an auto property
-        /// </exception>
-        /// <exception cref="System.ArgumentNullException">
-        /// The <paramref name="propertyDeclaration"/> is <c>null</c>.
-        /// </exception>
         public void Convert(
             [NotNull] IPropertyDeclaration propertyDeclaration, 
             bool includeInSerialization = true, 
@@ -116,9 +65,9 @@ namespace Catel.ReSharper.CatelProperties.CSharp
             Argument.IsNotNull(() => propertyDeclaration);
 
 #if R80 || R81 || R82 || R90
-            IDeclaredType propertyDataType = TypeFactory.CreateTypeByCLRName(CatelCore.PropertyData, this.psiModule, propertyDeclaration.GetResolveContext());
+            var propertyDataType = TypeFactory.CreateTypeByCLRName(CatelCore.PropertyData, this.psiModule, propertyDeclaration.GetResolveContext());
 #else
-            IDeclaredType propertyDataType = TypeFactory.CreateTypeByCLRName(CatelCore.PropertyData, this.psiModule);
+            var propertyDataType = TypeFactory.CreateTypeByCLRName(CatelCore.PropertyData, this.psiModule);
 #endif
 
             if (!propertyDeclaration.IsAuto)
@@ -126,8 +75,8 @@ namespace Catel.ReSharper.CatelProperties.CSharp
                 throw new ArgumentException("The 'propertyDeclaration' is not auto");
             }
 
-            string propertyName = propertyDeclaration.DeclaredName;
-            string propertyDataName = this.ComputeMemberName(string.Format(NamePatterns.PropertyDataName, propertyName));
+            var propertyName = propertyDeclaration.DeclaredName;
+            var propertyDataName = this.ComputeMemberName(string.Format(NamePatterns.PropertyDataName, propertyName));
 
             IFieldDeclaration propertyDataMemberDeclaration;
 
@@ -300,19 +249,9 @@ namespace Catel.ReSharper.CatelProperties.CSharp
         #endregion
 
         #region Methods
-
-        /// <summary>
-        /// The compute member name.
-        /// </summary>
-        /// <param name="memberNameBase">
-        /// The member name base.
-        /// </param>
-        /// <returns>
-        /// The System.String.
-        /// </returns>
         private string ComputeMemberName(string memberNameBase)
         {
-            string memberName = memberNameBase;
+            var memberName = memberNameBase;
             int idx = 0;
             while (
                 this.classDeclaration.MemberDeclarations.ToList()

@@ -23,39 +23,23 @@ namespace Catel.ReSharper.CatelProperties.Providers
 
     using DataConstants = JetBrains.ProjectModel.DataContext.DataConstants;
 
-    /// <summary>
-    /// The generate property data item provider.
-    /// </summary>
     [GenerateProvider]
     public class GeneratePropertyDataItemProvider : IGenerateActionProvider
     {
-        /// <summary>
-        /// The log.
-        /// </summary>
         private static readonly ILog Log = LogManager.GetCurrentClassLogger();
 
         #region Public Methods and Operators
 
-        /// <summary>
-        /// The create workflow.
-        /// </summary>
-        /// <param name="dataContext">
-        /// The data context.
-        /// </param>
-        /// <returns>
-        /// The <see cref="IEnumerable{T}"/>.
-        /// </returns>
-        /// <exception cref="System.ArgumentNullException">The <paramref name="dataContext"/> is <c>null</c>.</exception>
         public IEnumerable<IGenerateActionWorkflow> CreateWorkflow(IDataContext dataContext)
         {
             Argument.IsNotNull(() => dataContext);
 
-            ISolution solution = dataContext.GetData(DataConstants.SOLUTION);
+            var solution = dataContext.GetData(DataConstants.SOLUTION);
             var iconManager = solution.GetComponent<PsiIconManager>();
 #if R61
-            Image icon = iconManager.GetImage(CLRDeclaredElementType.PROPERTY);
+            var icon = iconManager.GetImage(CLRDeclaredElementType.PROPERTY);
 #else
-            IconId icon = iconManager.GetImage(CLRDeclaredElementType.PROPERTY);
+            var icon = iconManager.GetImage(CLRDeclaredElementType.PROPERTY);
 #endif
 
             yield return new GeneratePropertyDataWorkflow(icon);

@@ -11,7 +11,6 @@ namespace Catel.ReSharper.Arguments
 
     using Catel.Logging;
     using Catel.ReSharper.CSharp;
-    using Catel.ReSharper.Extensions;
     using Catel.ReSharper.Identifiers;
 
     using JetBrains.Application;

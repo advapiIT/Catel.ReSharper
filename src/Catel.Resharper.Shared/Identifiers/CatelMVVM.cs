@@ -33,106 +33,34 @@ namespace Catel.ReSharper.Identifiers
         /// The view model to model attribute.
         /// </summary>
         public const string ViewModelToModelAttribute = "Catel.MVVM.ViewModelToModelAttribute";
+
 #if R80 || R81 || R82 || R90
-        /// <summary>
-        /// The try get view model to model attribute type element.
-        /// </summary>
-        /// <param name="psiModule">
-        /// The psi module.
-        /// </param>
-        /// <param name="typeElement">
-        /// The type element.
-        /// </param>
-        /// <returns>
-        /// The System.Boolean.
-        /// </returns>
         public static bool TryGetViewModelToModelAttributeTypeElement(IPsiModule psiModule, IModuleReferenceResolveContext moduleReferenceResolveContext, out ITypeElement typeElement)
         {
             return TypeHelper.TryGetTypeElement(ViewModelToModelAttribute, psiModule, moduleReferenceResolveContext, out typeElement);
         }
 
-        /// <summary>
-        /// The try get model attribute type element.
-        /// </summary>
-        /// <param name="psiModule">
-        /// The psi module.
-        /// </param>
-        /// <param name="typeElement">
-        /// The type element.
-        /// </param>
-        /// <returns>
-        /// The System.Boolean.
-        /// </returns>
         public static bool TryGetModelAttributeTypeElement(IPsiModule psiModule, IModuleReferenceResolveContext moduleReferenceResolveContext, out ITypeElement typeElement)
         {
             return TypeHelper.TryGetTypeElement(ModelAttribute, psiModule, moduleReferenceResolveContext, out typeElement);
         }
 
-        /// <summary>
-        /// The try get view model base type element.
-        /// </summary>
-        /// <param name="psiModule">
-        /// The psi module.
-        /// </param>
-        /// <param name="typeElement">
-        /// The type element.
-        /// </param>
-        /// <returns>
-        /// The System.Boolean.
-        /// </returns>
         public static bool TryGetViewModelBaseTypeElement(IPsiModule psiModule, IModuleReferenceResolveContext moduleReferenceResolveContext, out ITypeElement typeElement)
         {
             return TypeHelper.TryGetTypeElement(ViewModelBase, psiModule, moduleReferenceResolveContext, out typeElement);
         }       
 
 #else
-
-        /// <summary>
-        /// The try get view model to model attribute type element.
-        /// </summary>
-        /// <param name="psiModule">
-        /// The psi module.
-        /// </param>
-        /// <param name="typeElement">
-        /// The type element.
-        /// </param>
-        /// <returns>
-        /// The System.Boolean.
-        /// </returns>
         public static bool TryGetViewModelToModelAttributeTypeElement(IPsiModule psiModule, out ITypeElement typeElement)
         {
             return TypeHelper.TryGetTypeElement(ViewModelToModelAttribute, psiModule, out typeElement);
         }
 
-        /// <summary>
-        /// The try get model attribute type element.
-        /// </summary>
-        /// <param name="psiModule">
-        /// The psi module.
-        /// </param>
-        /// <param name="typeElement">
-        /// The type element.
-        /// </param>
-        /// <returns>
-        /// The System.Boolean.
-        /// </returns>
         public static bool TryGetModelAttributeTypeElement(IPsiModule psiModule, out ITypeElement typeElement)
         {
             return TypeHelper.TryGetTypeElement(ModelAttribute, psiModule, out typeElement);
         }
 
-        /// <summary>
-        /// The try get view model base type element.
-        /// </summary>
-        /// <param name="psiModule">
-        /// The psi module.
-        /// </param>
-        /// <param name="typeElement">
-        /// The type element.
-        /// </param>
-        /// <returns>
-        /// The System.Boolean.
-        /// </returns>
         public static bool TryGetViewModelBaseTypeElement(IPsiModule psiModule, out ITypeElement typeElement)
         {
             return TypeHelper.TryGetTypeElement(ViewModelBase, psiModule, out typeElement);

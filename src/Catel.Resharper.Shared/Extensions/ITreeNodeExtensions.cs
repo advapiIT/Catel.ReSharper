@@ -4,7 +4,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Catel.ReSharper.Extensions
+namespace Catel.ReSharper
 {
     using System.Collections.Generic;
     using System.Linq;
@@ -14,9 +14,6 @@ namespace Catel.ReSharper.Extensions
     using JetBrains.ReSharper.Psi.Tree;
     using JetBrains.Util;
 
-    /// <summary>
-    /// The i tree node extensions.
-    /// </summary>
     internal static class ITreeNodeExtensions
     {
         #region Public Methods and Operators
@@ -55,18 +52,6 @@ namespace Catel.ReSharper.Extensions
         }
 
 #if R81 || R82 || R90
-        /// <summary>
-        /// Get the fields.
-        /// </summary>
-        /// <param name="this">
-        /// The self instance.
-        /// </param>
-        /// <returns>
-        /// The fields
-        /// </returns>
-        /// <exception cref="System.ArgumentNullException">
-        /// The <paramref name="this"/> is <c>null</c>.
-        /// </exception>
         public static Dictionary<string, List<DocumentRange>> GetFields(this ITreeNode @this)
         {
             Argument.IsNotNull(() => @this);
@@ -74,18 +59,6 @@ namespace Catel.ReSharper.Extensions
             return GetDocumentRangesDictionary(@this);
         }
 #else
-        /// <summary>
-        /// Get the fields.
-        /// </summary>
-        /// <param name="this">
-        /// The self instance.
-        /// </param>
-        /// <returns>
-        /// The fields
-        /// </returns>
-        /// <exception cref="System.ArgumentNullException">
-        /// The <paramref name="this"/> is <c>null</c>.
-        /// </exception>
         public static Dictionary<string, List<TextRange>> GetFields(this ITreeNode @this)
         {
             Argument.IsNotNull(() => @this);

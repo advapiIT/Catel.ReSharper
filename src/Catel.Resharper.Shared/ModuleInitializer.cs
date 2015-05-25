@@ -30,8 +30,9 @@ namespace Catel.ReSharper
         public static void Initialize()
         {
 #if DEBUG
-            LogManager.RegisterDebugListener();
+            LogManager.AddDebugListener();
 #endif
+
             LogManager.AddListener(new LoggerListener());
 
             Log.Debug("Loading Catel.ReSharper");

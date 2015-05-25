@@ -15,35 +15,19 @@ namespace Catel.ReSharper.Types
     using JetBrains.ReSharper.Feature.Services.CSharp.Bulbs;
 #endif
 
-
-    /// <summary>
-    ///     The convert to view model base action.
-    /// </summary>
     [ContextAction(Name = Name, Group = "C#", Description = Description, Priority = -20)]
     public sealed class InheritFromViewModelBaseAction : InheritFromActionBase
     {
         #region Constants
 
-        /// <summary>
-        /// The description.
-        /// </summary>
         private const string Description = "InheritFromViewModelBaseActionDescription";
 
-        /// <summary>
-        /// The name.
-        /// </summary>
         private const string Name = "InheritFromViewModelBaseAction";
 
         #endregion
 
         #region Constructors and Destructors
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="InheritFromViewModelBaseAction"/> class.
-        /// </summary>
-        /// <param name="provider">
-        /// The provider.
-        /// </param>
         public InheritFromViewModelBaseAction(ICSharpContextActionDataProvider provider)
             : base(provider)
         {
@@ -53,9 +37,6 @@ namespace Catel.ReSharper.Types
 
         #region Properties
 
-        /// <summary>
-        ///     Gets SuperTypeName.
-        /// </summary>
         protected override string SuperTypeName
         {
             get
