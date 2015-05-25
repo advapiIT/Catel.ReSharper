@@ -16,10 +16,11 @@ using JetBrains.Application.PluginSupport;
 [assembly: AssemblyProduct("Catel.ReSharper")]
 [assembly: AssemblyDescription("Catel.ReSharper")]
 
-[assembly: ActionsXml("Catel.ReSharper.Actions.xml")]
+
 
 #if R81 || R82
 // The following information is displayed by ReSharper in the Plugins dialog
+[assembly: ActionsXml("Catel.ReSharper.Actions.xml")]
 [assembly: PluginTitle("Catel.ReSharper")]
 [assembly: PluginDescription("ReSharper plugin for Catel")]
 [assembly: PluginVendor("Catel development team")]
