@@ -10,15 +10,16 @@ namespace Catel.ReSharper.CatelProperties.CSharp.Actions
     using Catel.ReSharper.Identifiers;
 
     using JetBrains.Application;
-#if R90
-    using JetBrains.ReSharper.Resources.Shell;
-    using JetBrains.ReSharper.Feature.Services.CSharp.Analyses.Bulbs;
-#endif
     using JetBrains.ReSharper.Feature.Services.CSharp.Bulbs;
     using JetBrains.ReSharper.Psi;
     using JetBrains.ReSharper.Psi.CSharp.Tree;
     using JetBrains.ReSharper.Psi.Tree;
     using JetBrains.Util;
+
+#if R9X
+    using JetBrains.ReSharper.Resources.Shell;
+    using JetBrains.ReSharper.Feature.Services.CSharp.Analyses.Bulbs;
+#endif
 
     public abstract class FieldContextActionBase : ContextActionBase
     {
@@ -58,12 +59,8 @@ namespace Catel.ReSharper.CatelProperties.CSharp.Actions
                         && FieldDeclaration.Parent.Parent.Parent is IClassDeclaration)
                     {
                         ClassDeclaration = FieldDeclaration.Parent.Parent.Parent as IClassDeclaration;
-                        ITypeElement classDeclaredElement = ClassDeclaration.DeclaredElement;
-#if R80 || R81 || R82 || R90
+                        var classDeclaredElement = ClassDeclaration.DeclaredElement;
                         if (classDeclaredElement != null && (classDeclaredElement.IsDescendantOf(CatelCore.GetDataObjectBaseTypeElement(Provider.PsiModule, selectedElement.GetResolveContext())) || classDeclaredElement.IsDescendantOf(CatelCore.GetModelBaseTypeElement(Provider.PsiModule, selectedElement.GetResolveContext()))) && (FieldDeclaration.IsStatic && FieldDeclaration.Initial is IExpressionInitializer))
-#else
-                        if (classDeclaredElement != null && (classDeclaredElement.IsDescendantOf(CatelCore.GetDataObjectBaseTypeElement(Provider.PsiModule)) || classDeclaredElement.IsDescendantOf(CatelCore.GetModelBaseTypeElement(Provider.PsiModule))) && (FieldDeclaration.IsStatic && FieldDeclaration.Initial is IExpressionInitializer))
-#endif
                         {
                             var expressionInitializer = FieldDeclaration.Initial as IExpressionInitializer;
                             if (expressionInitializer.Value is IInvocationExpression)

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="..\..\lib\JetBrains.ReSharper.SDK.8.2.921-EAP\build\JetBrains.ReSharper.SDK.Props" Condition="Exists('..\..\lib\JetBrains.ReSharper.SDK.8.2.921-EAP\build\JetBrains.ReSharper.SDK.Props')" />
   <PropertyGroup>
@@ -25,7 +25,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>..\..\output\debug\v90\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;JET_MODE_ASSERT;R90</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;JET_MODE_ASSERT;R90;R9X</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>
@@ -35,7 +35,7 @@
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>..\..\output\release\v90\</OutputPath>
-    <DefineConstants>TRACE;JET_MODE_ASSERT;R90</DefineConstants>
+    <DefineConstants>TRACE;JET_MODE_ASSERT;R90;R9X</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>
@@ -53,6 +53,10 @@
     <Reference Include="Catel.Core, Version=4.2.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\Catel.Core.4.2.0-unstable0130\lib\net40\Catel.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Catel.Fody.Attributes">
+      <HintPath>..\..\lib\Catel.Fody.2.6.0\lib\portable-net4+sl4+wp7+win8+wpa81+MonoAndroid14+MonoTouch40\Catel.Fody.Attributes.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="CookComputing.XmlRpcV2">
@@ -179,6 +183,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="FodyWeavers.xml" />
   </ItemGroup>
   <Import Project="..\Catel.Resharper.Shared\Catel.Resharper.Shared.projitems" Label="Shared" />
   <!--

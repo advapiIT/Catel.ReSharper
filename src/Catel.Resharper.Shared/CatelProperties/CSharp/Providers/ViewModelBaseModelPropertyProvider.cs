@@ -18,10 +18,7 @@ namespace Catel.ReSharper.CatelProperties.CSharp.Providers
     using JetBrains.ReSharper.Psi.CSharp;
     using JetBrains.ReSharper.Psi.CSharp.Tree;
     using JetBrains.ReSharper.Psi.Resolve;
-#if R80 || R81 || R82 || R90
     using JetBrains.ReSharper.Psi.Tree;
-#endif
-    using JetBrains.ReSharper.Psi.Util;
     using JetBrains.Util;
 
     /// <summary>
@@ -48,24 +45,16 @@ namespace Catel.ReSharper.CatelProperties.CSharp.Providers
             {
                 var classLikeDeclaration = context.ClassDeclaration;
                 var declaredElement = classLikeDeclaration.DeclaredElement;
-#if R80 || R81 || R82 || R90
-
                 var moduleReferenceResolveContext = context.Anchor.GetResolveContext();
                 var viewModelBaseElement = TypeFactory.CreateTypeByCLRName(CatelMVVM.ViewModelBase, context.PsiModule, moduleReferenceResolveContext).GetTypeElement();
-#else
-                var viewModelBaseElement = TypeFactory.CreateTypeByCLRName(CatelMVVM.ViewModelBase, context.PsiModule).GetTypeElement();
-#endif
+
                 if (declaredElement is IClass && declaredElement.IsDescendantOf(viewModelBaseElement))
                 {
-#if R80 || R81 || R82 || R90
-                    IDeclaredType modelAttributeClrType = TypeFactory.CreateTypeByCLRName(CatelMVVM.ModelAttribute, context.PsiModule, moduleReferenceResolveContext);
-                IDeclaredType viewModelToModelAttributeClrType = TypeFactory.CreateTypeByCLRName(CatelMVVM.ViewModelToModelAttribute, context.PsiModule, moduleReferenceResolveContext);
-#else
-                    IDeclaredType modelAttributeClrType = TypeFactory.CreateTypeByCLRName(CatelMVVM.ModelAttribute, context.PsiModule);
-                    IDeclaredType viewModelToModelAttributeClrType = TypeFactory.CreateTypeByCLRName(CatelMVVM.ViewModelToModelAttribute, context.PsiModule);
-#endif
+                    var modelAttributeClrType = TypeFactory.CreateTypeByCLRName(CatelMVVM.ModelAttribute, context.PsiModule, moduleReferenceResolveContext);
+                    var viewModelToModelAttributeClrType = TypeFactory.CreateTypeByCLRName(CatelMVVM.ViewModelToModelAttribute, context.PsiModule, moduleReferenceResolveContext);
                     var properties = new List<IProperty>();
-                    ITypeElement element = declaredElement;
+                    var element = declaredElement;
+
                     do
                     {
                         properties.AddRange(element.GetMembers().OfType<IProperty>());
@@ -76,14 +65,9 @@ namespace Catel.ReSharper.CatelProperties.CSharp.Providers
 
                     Log.Debug("Looking for ViewModelToModel properties");
                     var viewModelProperties = new Dictionary<string, List<string>>();
-                    foreach (IProperty property in properties)
+                    foreach (var property in properties)
                     {
-#if R80 || R81 || R82 || R90
-
-                        IAttributeInstance viewModelToModel = property.GetAttributeInstances(false).FirstOrDefault(instance => Equals(instance.GetAttributeType(), viewModelToModelAttributeClrType));
-#else
-                        IAttributeInstance viewModelToModel = property.GetAttributeInstances(false).FirstOrDefault(instance => Equals(instance.AttributeType, viewModelToModelAttributeClrType));
-#endif
+                        var viewModelToModel = property.GetAttributeInstances(false).FirstOrDefault(instance => Equals(instance.GetAttributeType(), viewModelToModelAttributeClrType));
                         if (viewModelToModel != null)
                         {
                             var positionParameters = viewModelToModel.PositionParameters().ToList();
@@ -107,11 +91,7 @@ namespace Catel.ReSharper.CatelProperties.CSharp.Providers
 
                     foreach (IProperty property in properties)
                     {
-#if R80 || R81 || R82 || R90
                         if (property.GetAttributeInstances(false).FirstOrDefault(instance => Equals(instance.GetAttributeType(), modelAttributeClrType)) != null)
-#else
-                        if (property.GetAttributeInstances(false).FirstOrDefault(instance => Equals(instance.AttributeType, modelAttributeClrType)) != null)
-#endif
                         {
                             var propertyDeclaration = property.GetDeclarations().FirstOrDefault() as IPropertyDeclaration;
                             if (propertyDeclaration != null && propertyDeclaration.Type is IDeclaredType)
@@ -126,7 +106,7 @@ namespace Catel.ReSharper.CatelProperties.CSharp.Providers
                             }
                         }
                     }
-                }                
+                }
             }
         }
 

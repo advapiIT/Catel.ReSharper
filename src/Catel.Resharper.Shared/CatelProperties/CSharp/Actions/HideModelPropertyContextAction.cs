@@ -12,19 +12,18 @@ namespace Catel.ReSharper.CatelProperties.CSharp.Actions
 
     using JetBrains.Application.Progress;
     using JetBrains.ProjectModel;
-#if R90
-    using JetBrains.ReSharper.Feature.Services.CSharp.Analyses.Bulbs;
-    using JetBrains.ReSharper.Feature.Services.ContextActions;
-#else
+    using JetBrains.ReSharper.Psi;
+    using JetBrains.ReSharper.Psi.Tree;
+    using JetBrains.ReSharper.Psi.CSharp.Tree;
+    using JetBrains.TextControl;
+
+#if R8X
     using JetBrains.ReSharper.Feature.Services.Bulbs;
     using JetBrains.ReSharper.Feature.Services.CSharp.Bulbs;
+#else
+    using JetBrains.ReSharper.Feature.Services.CSharp.Analyses.Bulbs;
+    using JetBrains.ReSharper.Feature.Services.ContextActions;
 #endif
-    using JetBrains.ReSharper.Psi;
-    using JetBrains.ReSharper.Psi.CSharp.Tree;
-#if R80 || R81 || R82 || R90
-    using JetBrains.ReSharper.Psi.Tree;
-#endif
-    using JetBrains.TextControl;
 
     [ContextAction(Name = Name, Group = "C#", Description = Description, Priority = -23)]
     public sealed class HideModelPropertyContextAction : FieldContextActionBase
@@ -68,11 +67,7 @@ namespace Catel.ReSharper.CatelProperties.CSharp.Actions
         {
             ITypeElement typeElement;
             IAttribute viewModelToModelAttribute = null;
-#if R80 || R81 || R82 || R90
             if (CatelMVVM.TryGetViewModelToModelAttributeTypeElement(Provider.PsiModule, Provider.SelectedElement.GetResolveContext(), out typeElement))
-#else
-            if (CatelMVVM.TryGetViewModelToModelAttributeTypeElement(Provider.PsiModule, out typeElement))
-#endif
             {
                 viewModelToModelAttribute = (from attribute in PropertyDeclaration.Attributes
                                              where

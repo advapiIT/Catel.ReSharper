@@ -6,19 +6,17 @@
 namespace Catel.ReSharper.CatelProperties.CSharp.Actions
 {
     using System;
-
-
     using JetBrains.Application.Progress;
     using JetBrains.ProjectModel;
-    
-#if R90
-    using JetBrains.ReSharper.Feature.Services.ContextActions;
-    using JetBrains.ReSharper.Feature.Services.CSharp.Analyses.Bulbs;
-#else
+    using JetBrains.TextControl;
+
+#if R8X
     using JetBrains.ReSharper.Feature.Services.Bulbs;
     using JetBrains.ReSharper.Feature.Services.CSharp.Bulbs;
+#else
+    using JetBrains.ReSharper.Feature.Services.ContextActions;
+    using JetBrains.ReSharper.Feature.Services.CSharp.Analyses.Bulbs;
 #endif
-    using JetBrains.TextControl;
 
     [ContextAction(Name = Name, Group = "C#", Description = Description, Priority = -23)]
     public sealed class RevertToAutoPropertyContextAction : FieldContextActionBase

@@ -10,18 +10,17 @@ namespace Catel.ReSharper.Arguments
 {
     using System;
     using System.Xml;
-
-    using Catel.Logging;
-
-#if R90
-    using JetBrains.ReSharper.Feature.Services.CSharp.Analyses.Bulbs;
-    using JetBrains.ReSharper.Feature.Services.ContextActions;
-#else
-    using JetBrains.ReSharper.Feature.Services.Bulbs;
-    using JetBrains.ReSharper.Feature.Services.CSharp.Bulbs;
-#endif
     using JetBrains.ReSharper.Psi;
     using JetBrains.ReSharper.Psi.CSharp.Tree;
+    using Catel.Logging;
+
+#if R8X
+    using JetBrains.ReSharper.Feature.Services.Bulbs;
+    using JetBrains.ReSharper.Feature.Services.CSharp.Bulbs;
+#else
+    using JetBrains.ReSharper.Feature.Services.CSharp.Analyses.Bulbs;
+    using JetBrains.ReSharper.Feature.Services.ContextActions;
+#endif
 
     [ContextAction(Name = Name, Group = "C#", Description = Description, Priority = -20)]
     public sealed class IsNotNullOrEmptyContextAction : ArgumentContextActionBase

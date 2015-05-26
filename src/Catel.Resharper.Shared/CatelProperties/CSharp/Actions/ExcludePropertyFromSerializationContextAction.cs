@@ -15,12 +15,12 @@ namespace Catel.ReSharper.CatelProperties.CSharp.Actions
     using JetBrains.ReSharper.Psi.CSharp.Tree;
     using JetBrains.TextControl;
 
-#if R90
-    using JetBrains.ReSharper.Feature.Services.CSharp.Analyses.Bulbs;
-    using JetBrains.ReSharper.Feature.Services.ContextActions;
-#else
+#if R8X
     using JetBrains.ReSharper.Feature.Services.Bulbs;
     using JetBrains.ReSharper.Feature.Services.CSharp.Bulbs;
+#else
+    using JetBrains.ReSharper.Feature.Services.CSharp.Analyses.Bulbs;
+    using JetBrains.ReSharper.Feature.Services.ContextActions;
 #endif
 
     [ContextAction(Name = Name, Group = "C#", Description = Description, Priority = -21)]

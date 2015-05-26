@@ -13,22 +13,19 @@ namespace Catel.ReSharper.CatelProperties.CSharp.Actions
 
     using JetBrains.Application;
     using JetBrains.Application.Progress;
-    using JetBrains.Metadata.Reader.API;
     using JetBrains.ProjectModel;
-#if R81 || R82 || R90
-    using JetBrains.Metadata.Reader.API;
-#endif
-
-#if R90
-    using JetBrains.ReSharper.Resources.Shell;
-    using JetBrains.ReSharper.Feature.Services.CSharp.Analyses.Bulbs;
-#endif
     using JetBrains.ReSharper.Feature.Services.CSharp.Bulbs;
     using JetBrains.ReSharper.Psi;
     using JetBrains.ReSharper.Psi.CSharp.Tree;
     using JetBrains.ReSharper.Psi.Tree;
     using JetBrains.TextControl;
     using JetBrains.Util;
+
+#if R9X
+    using JetBrains.ReSharper.Resources.Shell;
+    using JetBrains.ReSharper.Feature.Services.CSharp.Analyses.Bulbs;
+#endif
+
     public abstract class PropertyContextActionBase : ContextActionBase
     {
         #region Static Fields
@@ -54,15 +51,10 @@ namespace Catel.ReSharper.CatelProperties.CSharp.Actions
         #region Public Methods and Operators
         public override sealed bool IsAvailable(IUserDataHolder cache)
         {
-#if R80 || R81 || R82 || R90
-            IModuleReferenceResolveContext moduleReferenceResolveContext;
-#endif
             using (ReadLockCookie.Create())
             {
-                ITreeNode selectedElement = Provider.SelectedElement;
-#if R80 || R81 || R82 || R90
-                moduleReferenceResolveContext = selectedElement.GetResolveContext();
-#endif
+                var selectedElement = Provider.SelectedElement;
+                var moduleReferenceResolveContext = selectedElement.GetResolveContext();
                 if (selectedElement != null && selectedElement.Parent is IPropertyDeclaration)
                 {
                     _propertyDeclaration = selectedElement.Parent as IPropertyDeclaration;
@@ -73,15 +65,10 @@ namespace Catel.ReSharper.CatelProperties.CSharp.Actions
                     }
                 }
             }
-#if R80 || R81 || R82 || R90
+
             return _classDeclaration != null && _classDeclaration.DeclaredElement != null
                    && (_classDeclaration.DeclaredElement.IsDescendantOf(CatelCore.GetDataObjectBaseTypeElement(Provider.PsiModule, _classDeclaration.GetResolveContext()))
                        || _classDeclaration.DeclaredElement.IsDescendantOf(CatelCore.GetModelBaseTypeElement(Provider.PsiModule, _classDeclaration.GetResolveContext())));
-#else
-            return classDeclaration != null && classDeclaration.DeclaredElement != null
-                   && (classDeclaration.DeclaredElement.IsDescendantOf(CatelCore.GetDataObjectBaseTypeElement(Provider.PsiModule))
-                       || classDeclaration.DeclaredElement.IsDescendantOf(CatelCore.GetModelBaseTypeElement(Provider.PsiModule)));
-#endif
         }
 
         #endregion
@@ -95,9 +82,7 @@ namespace Catel.ReSharper.CatelProperties.CSharp.Actions
         {
             using (WriteLockCookie.Create())
             {
-                ConvertProperty(
-                    new PropertyConverter(Provider.ElementFactory, Provider.PsiModule, _classDeclaration), 
-                    _propertyDeclaration);
+                ConvertProperty(new PropertyConverter(Provider.ElementFactory, Provider.PsiModule, _classDeclaration), _propertyDeclaration);
             }
 
             return null;

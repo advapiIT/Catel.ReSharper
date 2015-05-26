@@ -12,22 +12,17 @@ namespace Catel.ReSharper.Types
     using JetBrains.Application;
     using JetBrains.Application.Progress;
     using JetBrains.ProjectModel;
-
-#if R90
-    using JetBrains.ReSharper.Resources.Shell;
-    using JetBrains.ReSharper.Feature.Services.CSharp.Analyses.Bulbs;
-#endif
-
     using JetBrains.ReSharper.Feature.Services.CSharp.Bulbs;
     using JetBrains.ReSharper.Psi;
     using JetBrains.ReSharper.Psi.CSharp.Tree;
-
-#if R80 || R81 || R82 || R90
     using JetBrains.ReSharper.Psi.Tree;
-#endif
-
     using JetBrains.TextControl;
     using JetBrains.Util;
+
+#if !R8X
+    using JetBrains.ReSharper.Resources.Shell;
+    using JetBrains.ReSharper.Feature.Services.CSharp.Analyses.Bulbs;
+#endif
 
     public abstract class InheritFromActionBase : ContextActionBase
     {
@@ -58,12 +53,7 @@ namespace Catel.ReSharper.Types
             {
                 if (Provider.SelectedElement != null)
                 {
-#if R80 || R81 || R82 || R90
-
-                    _superType = TypeFactory.CreateTypeByCLRName(this.SuperTypeName, this.Provider.PsiModule, this.Provider.SelectedElement.GetResolveContext());
-#else
-                    _superType = TypeFactory.CreateTypeByCLRName(SuperTypeName, Provider.PsiModule);
-#endif
+                    _superType = TypeFactory.CreateTypeByCLRName(SuperTypeName, Provider.PsiModule, Provider.SelectedElement.GetResolveContext());
                     if (_superType.GetTypeElement() != null)
                     {
                         _classDeclaration = Provider.SelectedElement.Parent as IClassDeclaration;
@@ -71,7 +61,7 @@ namespace Catel.ReSharper.Types
                 }
             }
 
-            // !this._classDeclaration.IsStatic doesn't work, IsStatic is returns true
+            // !_classDeclaration.IsStatic doesn't work, IsStatic is returns true
             return _classDeclaration != null && !_classDeclaration.IsStaticEx() && _classDeclaration.SuperTypes.IsEmpty();
         }
 

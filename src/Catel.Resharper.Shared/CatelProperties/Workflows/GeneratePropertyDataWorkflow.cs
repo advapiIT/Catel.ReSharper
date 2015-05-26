@@ -13,18 +13,14 @@ namespace Catel.ReSharper.CatelProperties.Workflows
     using JetBrains.ProjectModel;
     using JetBrains.ReSharper.Feature.Services.Generate;
     using JetBrains.ReSharper.Feature.Services.Generate.Actions;
-#if R90
-    using JetBrains.ReSharper.Feature.Services.Generate.UI.New;
-#endif
     using JetBrains.ReSharper.Psi;
-
-#if R70 || R71 || R80 || R81 || R82 || R90
     using JetBrains.UI.Icons;
-#elif R61
-    using System.Drawing;
-#endif
 
     using DataConstants = JetBrains.ProjectModel.DataContext.DataConstants;
+
+#if R90 || R91
+    using JetBrains.ReSharper.Feature.Services.Generate.UI.New;
+#endif
 
     public class GeneratePropertyDataWorkflow : StandardGenerateActionWorkflow
     {
@@ -38,13 +34,8 @@ namespace Catel.ReSharper.CatelProperties.Workflows
 
         #region Constructors and Destructors
 
-#if R70 || R71 || R80 || R81 || R82 || R90
         public GeneratePropertyDataWorkflow(IconId icon)
             : base(WellKnownGenerationActionKinds.GenerateCatelDataProperties, icon, MenuText, GenerateActionGroup.CLR_LANGUAGE, WindowTitle, Description, GeneratePropertyDataAction.Id)
-#elif R61
-        public GeneratePropertyDataWorkflow(Image icon)
-            : base(WellKnownGenerationActionKinds.GenerateCatelDataProperties, icon, MenuText, GenerateActionGroup.CLR_LANGUAGE, WindowTitle, Description, GeneratePropertyDataAction.Id)
-#endif
         {
         }
 

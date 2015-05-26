@@ -20,9 +20,7 @@ namespace Catel.ReSharper.CatelProperties.CSharp
     using JetBrains.ReSharper.Psi.CSharp.Tree;
     using JetBrains.ReSharper.Psi.ExtensionsAPI.Tree;
 
-#if R80 || R81 || R82 || R90
     using JetBrains.ReSharper.Psi.Modules;
-#endif
     using JetBrains.ReSharper.Psi.Tree;
 
     public class PropertyConverter
@@ -33,11 +31,11 @@ namespace Catel.ReSharper.CatelProperties.CSharp
         #endregion
 
         #region Fields
-        private readonly IClassDeclaration classDeclaration;
+        private readonly IClassDeclaration _classDeclaration;
 
-        private readonly CSharpElementFactory factory;
+        private readonly CSharpElementFactory _factory;
 
-        private readonly IPsiModule psiModule;
+        private readonly IPsiModule _psiModule;
 
         #endregion
 
@@ -48,9 +46,9 @@ namespace Catel.ReSharper.CatelProperties.CSharp
             Argument.IsNotNull(() => psiModule);
             Argument.IsNotNull(() => classDeclaration);
 
-            this.factory = factory;
-            this.psiModule = psiModule;
-            this.classDeclaration = classDeclaration;
+            _factory = factory;
+            _psiModule = psiModule;
+            _classDeclaration = classDeclaration;
         }
 
         #endregion
@@ -64,46 +62,42 @@ namespace Catel.ReSharper.CatelProperties.CSharp
         {
             Argument.IsNotNull(() => propertyDeclaration);
 
-#if R80 || R81 || R82 || R90
-            var propertyDataType = TypeFactory.CreateTypeByCLRName(CatelCore.PropertyData, this.psiModule, propertyDeclaration.GetResolveContext());
-#else
-            var propertyDataType = TypeFactory.CreateTypeByCLRName(CatelCore.PropertyData, this.psiModule);
-#endif
-
+            var propertyDataType = TypeFactory.CreateTypeByCLRName(CatelCore.PropertyData, _psiModule, propertyDeclaration.GetResolveContext());
             if (!propertyDeclaration.IsAuto)
             {
                 throw new ArgumentException("The 'propertyDeclaration' is not auto");
             }
 
             var propertyName = propertyDeclaration.DeclaredName;
-            var propertyDataName = this.ComputeMemberName(string.Format(NamePatterns.PropertyDataName, propertyName));
+            var propertyDataName = ComputeMemberName(string.Format(NamePatterns.PropertyDataName, propertyName));
 
             IFieldDeclaration propertyDataMemberDeclaration;
 
-            var declaredName = this.classDeclaration.DeclaredName;
-            if (this.classDeclaration.TypeParameters.Count > 0)
+            var declaredName = _classDeclaration.DeclaredName;
+            if (_classDeclaration.TypeParameters.Count > 0)
             {
-                var parameters = this.classDeclaration.TypeParameters.Aggregate(string.Empty, (current, parameter) => current + (parameter.DeclaredName + ", "));
+                var parameters = _classDeclaration.TypeParameters.Aggregate(string.Empty, (current, parameter) => current + (parameter.DeclaredName + ", "));
                 declaredName = string.Format(CultureInfo.InvariantCulture, "{0}<{1}>", declaredName, parameters.Substring(0, parameters.Length - 2));
             }
 
             if (notificationMethod)
             {
-                string methodName = this.ComputeMemberName(string.Format(NamePatterns.NotificationMethodName, propertyName));
+                var methodName = ComputeMemberName(string.Format(NamePatterns.NotificationMethodName, propertyName));
 
                 IMethodDeclaration methodDeclaration;
-#if !R90
+#if R8X
                 IDocCommentBlockNode methodComment;
 #else
                 IDocCommentBlock methodComment;
 #endif
+
                 if (forwardEventArgument)
                 {
                     if (includeInSerialization)
                     {
                         propertyDataMemberDeclaration =
                             (IFieldDeclaration)
-                            this.factory.CreateTypeMemberDeclaration(
+                            _factory.CreateTypeMemberDeclaration(
                                 ImplementationPatterns.PropertyDataWithNotificationMethodForwardingEventArgument, 
                                 propertyName, 
                                 propertyDataName, 
@@ -116,7 +110,7 @@ namespace Catel.ReSharper.CatelProperties.CSharp
                     {
                         propertyDataMemberDeclaration =
                             (IFieldDeclaration)
-                            this.factory.CreateTypeMemberDeclaration(
+                            _factory.CreateTypeMemberDeclaration(
                                 ImplementationPatterns
                                 .PropertyDataNonSerializedWithNotificationMethodForwardingEventArgument, 
                                 propertyName, 
@@ -127,19 +121,15 @@ namespace Catel.ReSharper.CatelProperties.CSharp
                                 methodName);
                     }
 
-#if R80 || R81 || R82 || R90
-                    IDeclaredType advancedPropertyChangedEventArgsType = TypeFactory.CreateTypeByCLRName(CatelCore.AdvancedPropertyChangedEventArgs, this.psiModule, propertyDeclaration.GetResolveContext());
-#else
-                    IDeclaredType advancedPropertyChangedEventArgsType = TypeFactory.CreateTypeByCLRName(CatelCore.AdvancedPropertyChangedEventArgs, this.psiModule);
-#endif
+                    var advancedPropertyChangedEventArgsType = TypeFactory.CreateTypeByCLRName(CatelCore.AdvancedPropertyChangedEventArgs, _psiModule, propertyDeclaration.GetResolveContext());
                     methodDeclaration =
                         (IMethodDeclaration)
-                        this.factory.CreateTypeMemberDeclaration(
+                        _factory.CreateTypeMemberDeclaration(
                             ImplementationPatterns.PropertyChangedNotificationMethodWithEventArgs, 
                             methodName, 
                             advancedPropertyChangedEventArgsType.GetTypeElement());
                     methodComment =
-                        this.factory.CreateDocCommentBlock(
+                        _factory.CreateDocCommentBlock(
                             string.Format(
                                 DocumentationPatterns.PropertyChangedNotificationMethodWithEventArgument, propertyName));
                 }
@@ -149,7 +139,7 @@ namespace Catel.ReSharper.CatelProperties.CSharp
                     {
                         propertyDataMemberDeclaration =
                             (IFieldDeclaration)
-                            this.factory.CreateTypeMemberDeclaration(
+                            _factory.CreateTypeMemberDeclaration(
                                 ImplementationPatterns.PropertyDataPlusNotificationMethod, 
                                 propertyName, 
                                 propertyDataName, 
@@ -162,7 +152,7 @@ namespace Catel.ReSharper.CatelProperties.CSharp
                     {
                         propertyDataMemberDeclaration =
                             (IFieldDeclaration)
-                            this.factory.CreateTypeMemberDeclaration(
+                            _factory.CreateTypeMemberDeclaration(
                                 ImplementationPatterns.PropertyDataNonSerializedPlusNotificationMethod, 
                                 propertyName, 
                                 propertyDataName, 
@@ -174,15 +164,15 @@ namespace Catel.ReSharper.CatelProperties.CSharp
 
                     methodDeclaration =
                         (IMethodDeclaration)
-                        this.factory.CreateTypeMemberDeclaration(
+                        _factory.CreateTypeMemberDeclaration(
                             ImplementationPatterns.PropertyChangedNotificationMethod, methodName);
                     methodComment =
-                        this.factory.CreateDocCommentBlock(
+                        _factory.CreateDocCommentBlock(
                             string.Format(DocumentationPatterns.PropertyChangedNotification, propertyName));
                 }
 
                 methodDeclaration = ModificationUtil.AddChildAfter(
-                    this.classDeclaration, propertyDeclaration, methodDeclaration);
+                    _classDeclaration, propertyDeclaration, methodDeclaration);
 
                 // context.PutMemberDeclaration(methodDeclaration, null, declaration => new GeneratorDeclarationElement(declaration));
                 // NOTE: Add xml doc to a method
@@ -198,7 +188,7 @@ namespace Catel.ReSharper.CatelProperties.CSharp
             {
                 propertyDataMemberDeclaration =
                     (IFieldDeclaration)
-                    this.factory.CreateTypeMemberDeclaration(
+                    _factory.CreateTypeMemberDeclaration(
                         ImplementationPatterns.PropertyData, 
                         propertyName, 
                         propertyDeclaration.DeclaredElement.Type, 
@@ -209,7 +199,7 @@ namespace Catel.ReSharper.CatelProperties.CSharp
             {
                 propertyDataMemberDeclaration =
                     (IFieldDeclaration)
-                    this.factory.CreateTypeMemberDeclaration(
+                    _factory.CreateTypeMemberDeclaration(
                         ImplementationPatterns.PropertyDataNonSerialized, 
                         propertyName, 
                         propertyDeclaration.DeclaredElement.Type, 
@@ -221,7 +211,7 @@ namespace Catel.ReSharper.CatelProperties.CSharp
             var multipleFieldDeclaration =
                 (IMultipleFieldDeclaration)
                 ModificationUtil.AddChildBefore(
-                    this.classDeclaration, propertyDeclaration, propertyDataMemberDeclaration.Parent);
+                    _classDeclaration, propertyDeclaration, propertyDataMemberDeclaration.Parent);
 
             // NOTE: Add xml doc to a property
             // TODO: Move this to an extension method
@@ -229,7 +219,7 @@ namespace Catel.ReSharper.CatelProperties.CSharp
             if (multipleFieldDeclaration != null && multipleFieldDeclaration.Parent != null)
             {
 
-                var propertyComment = this.factory.CreateDocCommentBlock(string.Format(DocumentationPatterns.PropertyData, propertyName));
+                var propertyComment = _factory.CreateDocCommentBlock(string.Format(DocumentationPatterns.PropertyData, propertyName));
                 ModificationUtil.AddChildBefore(multipleFieldDeclaration, multipleFieldDeclaration.FirstChild, propertyComment);
             }
 
@@ -238,11 +228,11 @@ namespace Catel.ReSharper.CatelProperties.CSharp
             {
                 accessorDeclaration.SetBody(
                     accessorDeclaration.Kind == AccessorKind.GETTER
-                        ? this.factory.CreateBlock(
+                        ? _factory.CreateBlock(
                             ImplementationPatterns.PropertyGetAccessor, 
                             propertyDeclaration.DeclaredElement.Type, 
                             propertyName)
-                        : this.factory.CreateBlock(ImplementationPatterns.PropertySetAccessor, propertyName));
+                        : _factory.CreateBlock(ImplementationPatterns.PropertySetAccessor, propertyName));
             }
         }
 
@@ -254,7 +244,7 @@ namespace Catel.ReSharper.CatelProperties.CSharp
             var memberName = memberNameBase;
             int idx = 0;
             while (
-                this.classDeclaration.MemberDeclarations.ToList()
+                _classDeclaration.MemberDeclarations.ToList()
                     .Exists(declaration => declaration.DeclaredName == memberName))
             {
                 memberName = memberNameBase + idx;

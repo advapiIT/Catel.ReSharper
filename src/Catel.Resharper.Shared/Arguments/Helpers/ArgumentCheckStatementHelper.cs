@@ -3,20 +3,19 @@
 //   Copyright (c) 2008 - 2012 Catel development team. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
+
 namespace Catel.ReSharper.Arguments
 {
     using Catel.ReSharper.Arguments.Patterns;
     using Catel.ReSharper.Identifiers;
-    using JetBrains.ReSharper.Feature.Services.CSharp.Bulbs;
     using JetBrains.ReSharper.Psi;
+    using JetBrains.ReSharper.Psi.Tree;
     using JetBrains.ReSharper.Psi.CSharp.Tree;
 
-#if R90
+#if R8X
+    using JetBrains.ReSharper.Feature.Services.CSharp.Bulbs;
+#else
     using JetBrains.ReSharper.Feature.Services.CSharp.Analyses.Bulbs;
-#endif
-
-#if R80 || R81 || R82 || R90
-    using JetBrains.ReSharper.Psi.Tree;
 #endif
 
     internal static class ArgumentCheckStatementHelper
@@ -82,11 +81,7 @@ namespace Catel.ReSharper.Arguments
             Argument.IsNotNullOrWhitespace(() => pattern);
             Argument.IsNotNull(() => parameterDeclaration);
 
-#if R80 || R81 || R82 || R90
             var catelArgumentType = TypeFactory.CreateTypeByCLRName(CatelCore.Argument, provider.PsiModule, provider.SelectedElement.GetResolveContext());
-#else
-            var catelArgumentType = TypeFactory.CreateTypeByCLRName(CatelCore.Argument, provider.PsiModule);
-#endif
 
             return provider.ElementFactory.CreateStatement(pattern, catelArgumentType.GetTypeElement(), parameterDeclaration.DeclaredName);
         }

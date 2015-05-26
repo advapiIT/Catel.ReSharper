@@ -11,9 +11,7 @@ namespace Catel.ReSharper
     using Catel.Logging;
     using JetBrains.Util;
     using LogEvent = Logging.LogEvent;
-#if R80 || R81 || R82 || R90
     using JetBrains.Util.Logging;
-#endif
 
     /// <summary>
     /// The logger listener.
@@ -23,7 +21,7 @@ namespace Catel.ReSharper
         #region Constructors and Destructors
         public LoggerListener()
         {
-#if DEBUG && !R90
+#if DEBUG && !R9X
             Logger.AppendListener(new DebugOutputLogEventListener("CatelR#"));
 #endif
         }

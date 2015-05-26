@@ -5,27 +5,15 @@
 // --------------------------------------------------------------------------------------------------------------------
 namespace Catel.ReSharper.CSharp
 {
-#if R90
+#if R90 || R91
     using JetBrains.ReSharper.Feature.Services.CSharp.Analyses.Bulbs;
-#endif
-
-#if R70 || R71 || R80 || R81 || R82
+    using JetBrainsContextActionBase = JetBrains.ReSharper.Feature.Services.ContextActions.ContextActionBase;
+#else
     using JetBrains.ReSharper.Feature.Services.CSharp.Bulbs;
-
-#elif R61
-    using JetBrains.ReSharper.Feature.Services.Bulbs;
-    using JetBrains.ReSharper.Feature.Services.CSharp.Bulbs;
-    using JetBrains.Util;
+    using JetBrainsContextActionBase = JetBrains.ReSharper.Intentions.Extensibility.ContextActionBase;
 #endif
 
-    public abstract class ContextActionBase : 
-#if R90
-        JetBrains.ReSharper.Feature.Services.ContextActions.ContextActionBase
-#elif R70 || R71 || R80 || R81 || R82 
-        JetBrains.ReSharper.Intentions.Extensibility.ContextActionBase
-#elif R61
-        BulbItemImpl, IContextAction
-#endif
+    public abstract class ContextActionBase : JetBrainsContextActionBase
     {
         protected ContextActionBase(ICSharpContextActionDataProvider provider)
         {
@@ -35,9 +23,5 @@ namespace Catel.ReSharper.CSharp
         }
 
         protected ICSharpContextActionDataProvider Provider { get; private set; }
-
-#if R61
-        public abstract bool IsAvailable(IUserDataHolder cache);
-#endif
     }
 }

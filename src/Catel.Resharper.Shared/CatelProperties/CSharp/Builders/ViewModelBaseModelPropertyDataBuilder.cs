@@ -10,33 +10,28 @@ namespace Catel.ReSharper.CatelProperties.CSharp.Builders
     using System.Linq;
 
     using Catel.Logging;
-
-#if R80 || R81 || R82
-    using JetBrains.Metadata.Reader.API;
-#endif
-    
     using Catel.ReSharper.CatelProperties.CSharp.Patterns;
     using Catel.ReSharper.Identifiers;
-
-#if R90
     using JetBrains.Metadata.Reader.API;
-#endif
-
     using JetBrains.ReSharper.Feature.Services.CSharp.Generate;
     using JetBrains.ReSharper.Feature.Services.Generate;
     using JetBrains.ReSharper.Psi;
     using JetBrains.ReSharper.Psi.CSharp;
     using JetBrains.ReSharper.Psi.CSharp.Tree;
     using JetBrains.ReSharper.Psi.ExtensionsAPI.Tree;
+    using JetBrains.ReSharper.Psi.Util;
+    using JetBrains.Util;
+
 
 #if R80 || R81 || R82
+    using JetBrains.Metadata.Reader.API;
     using JetBrains.ReSharper.Psi.Modules;
     using JetBrains.ReSharper.Psi.Tree;
 #endif
 
-    using JetBrains.ReSharper.Psi.Tree;
-    using JetBrains.ReSharper.Psi.Util;
-    using JetBrains.Util;
+#if R90
+    using JetBrains.Metadata.Reader.API;
+#endif
 
     [GeneratorBuilder(WellKnownGenerationActionKinds.ExposeModelPropertiesAsCatelDataProperties, typeof(CSharpLanguage))]
     internal sealed class ViewModelBaseModelPropertyDataBuilder : PropertyDataBuilderBase
@@ -48,29 +43,22 @@ namespace Catel.ReSharper.CatelProperties.CSharp.Builders
             get { return 0; }
         }
 
-#if R70 || R71 || R80 || R81 || R82 ||R90
         protected override void Process(CSharpGeneratorContext context)
-#elif R61
-        public override void Process(CSharpGeneratorContext context)
-#endif
         {
             Argument.IsNotNull(() => context);
 
             var factory = CSharpElementFactory.GetInstance(context.Root.GetPsiModule());
-#if R80 || R81 || R82 || R90
             var viewModelToModelAttributeClrType = TypeFactory.CreateTypeByCLRName(CatelMVVM.ViewModelToModelAttribute, context.PsiModule, UniversalModuleReferenceContext.Instance);
-#else
-            var viewModelToModelAttributeClrType = TypeFactory.CreateTypeByCLRName(CatelMVVM.ViewModelToModelAttribute, context.PsiModule);
-#endif
-            List<GeneratorDeclaredElement> declaredElements = context.InputElements.OfType<GeneratorDeclaredElement>().ToList();
-            IClassLikeDeclaration classLikeDeclaration = context.ClassDeclaration;
+
+            var declaredElements = context.InputElements.OfType<GeneratorDeclaredElement>().ToList();
+            var classLikeDeclaration = context.ClassDeclaration;
             if (classLikeDeclaration != null)
             {
-                bool includeInSerialization = bool.Parse(context.GetGlobalOptionValue(OptionIds.IncludePropertyInSerialization));
-                bool notificationMethod = bool.Parse(context.GetGlobalOptionValue(OptionIds.ImplementPropertyChangedNotificationMethod));
-                bool forwardEventArgument = bool.Parse(context.GetGlobalOptionValue(OptionIds.ForwardEventArgumentToImplementedPropertyChangedNotificationMethod));
+                var includeInSerialization = bool.Parse(context.GetGlobalOptionValue(OptionIds.IncludePropertyInSerialization));
+                var notificationMethod = bool.Parse(context.GetGlobalOptionValue(OptionIds.ImplementPropertyChangedNotificationMethod));
+                var forwardEventArgument = bool.Parse(context.GetGlobalOptionValue(OptionIds.ForwardEventArgumentToImplementedPropertyChangedNotificationMethod));
                 var propertyConverter = new PropertyConverter(factory, context.PsiModule, (IClassDeclaration)classLikeDeclaration);
-                foreach (GeneratorDeclaredElement declaredElement in declaredElements)
+                foreach (var declaredElement in declaredElements)
                 {
                     var model = (IProperty)declaredElement.GetGroupingObject();
                     var modelProperty = (IProperty)declaredElement.DeclaredElement;
@@ -82,6 +70,7 @@ namespace Catel.ReSharper.CatelProperties.CSharp.Builders
                         var cSharpTypeMemberDeclarations = new List<ICSharpTypeMemberDeclaration>();
 
                         IClassLikeDeclaration currentClassDeclaration = classLikeDeclaration;
+
                         do
                         {
                             cSharpTypeMemberDeclarations.AddRange(currentClassDeclaration.MemberDeclarations);
@@ -96,7 +85,6 @@ namespace Catel.ReSharper.CatelProperties.CSharp.Builders
                             }
                         }
                         while (currentClassDeclaration != null);
-
 
                         if (!cSharpTypeMemberDeclarations.Exists(declaration => declaration.DeclaredName == modelProperty.ShortName))
                         {
@@ -136,18 +124,12 @@ namespace Catel.ReSharper.CatelProperties.CSharp.Builders
                                 propertyDeclaration = ModificationUtil.AddChildAfter(classLikeDeclaration.Body.FirstChild, propertyDeclaration);
                             }
                         }
-#if R80 || R81 || R82 || R90
+
                         var fixedArguments = new List<AttributeValue> { new AttributeValue(ClrConstantValueFactory.CreateStringValue(model.ShortName, context.PsiModule, UniversalModuleReferenceContext.Instance)) };
-#else
-                        var fixedArguments = new List<AttributeValue> { new AttributeValue(ClrConstantValueFactory.CreateStringValue(model.ShortName, context.PsiModule)) };
-#endif
+
                         if (propertyName != modelProperty.ShortName)
                         {
-#if R80 || R81 || R82 || R90
-                            fixedArguments.Add(new AttributeValue(ClrConstantValueFactory.CreateStringValue(modelProperty.ShortName, context.PsiModule,  UniversalModuleReferenceContext.Instance)));
-#else
-                            fixedArguments.Add(new AttributeValue(ClrConstantValueFactory.CreateStringValue(modelProperty.ShortName, context.PsiModule)));
-#endif
+                            fixedArguments.Add(new AttributeValue(ClrConstantValueFactory.CreateStringValue(modelProperty.ShortName, context.PsiModule, UniversalModuleReferenceContext.Instance)));
                         }
 
                         Log.Debug("Adding attribute ViewModelToModel to property '{0}'", propertyName);

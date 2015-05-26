@@ -12,15 +12,11 @@ namespace Catel.ReSharper.CatelProperties.Workflows
     using JetBrains.ProjectModel;
     using JetBrains.ReSharper.Feature.Services.Generate;
     using JetBrains.ReSharper.Feature.Services.Generate.Actions;
-
-#if R90
-    using JetBrains.ReSharper.Feature.Services.Generate.UI.New;
-#endif
     using JetBrains.ReSharper.Psi;
-#if R70 || R71 || R80 || R81 || R82 || R90
     using JetBrains.UI.Icons;
-#elif R61
-    using System.Drawing;
+
+#if R90 || R91
+    using JetBrains.ReSharper.Feature.Services.Generate.UI.New;
 #endif
 
     using DataConstants = JetBrains.ProjectModel.DataContext.DataConstants;
@@ -35,13 +31,8 @@ namespace Catel.ReSharper.CatelProperties.Workflows
 
         private const string MenuText = "Expose model properties";
 
-#if R70 || R71 || R80 || R81 || R82 || R90
         public ExposeModelPropertyDataWorkflow(IconId icon)
             : base(WellKnownGenerationActionKinds.ExposeModelPropertiesAsCatelDataProperties, icon, MenuText, GenerateActionGroup.CLR_LANGUAGE, WindowTitle, Description, GeneratePropertyDataAction.Id)
-#elif R61
-        public ExposeModelPropertyDataWorkflow(Image icon)
-            : base(WellKnownGenerationActionKinds.ExposeModelPropertiesAsCatelDataProperties, icon, MenuText, GenerateActionGroup.CLR_LANGUAGE, WindowTitle, Description, GeneratePropertyDataAction.Id)
-#endif
         {
         }
 

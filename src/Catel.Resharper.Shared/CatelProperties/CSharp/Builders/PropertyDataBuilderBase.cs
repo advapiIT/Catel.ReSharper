@@ -12,18 +12,10 @@ namespace Catel.ReSharper.CatelProperties.CSharp.Builders
 
     internal abstract class PropertyDataBuilderBase : GeneratorBuilderBase<CSharpGeneratorContext>
     {
-#if R70 || R71 || R80
         protected override IList<IGeneratorOption> GetGlobalOptions(CSharpGeneratorContext context)
         {
             return GetGeneratorOptions();
         }
-
-#elif R61
-        public override IList<IGeneratorOption> GetGlobalOptions(CSharpGeneratorContext context)
-        {
-            return GetGeneratorOptions();
-        }
-#endif
 
         private static IList<IGeneratorOption> GetGeneratorOptions()
         {

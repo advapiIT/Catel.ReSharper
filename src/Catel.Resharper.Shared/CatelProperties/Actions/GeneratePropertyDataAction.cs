@@ -10,16 +10,15 @@ namespace Catel.ReSharper.CatelProperties.Actions
 
     using JetBrains.ActionManagement;
     using JetBrains.ReSharper.Feature.Services.Generate.Actions;
-#if R90
-    using JetBrains.UI.ActionsRevised;
-#endif
     using JetBrains.UI.RichText;
 
-#if R90 
-    [Action(Id)]
+#if R8X
+    using JbActionAttribute = JetBrains.ActionManagement.ActionHandlerAttribute;
 #else
-    [ActionHandler(Id)]
+    using JbActionAttribute = JetBrains.UI.ActionsRevised.ActionAttribute;
 #endif
+
+    [JbActionAttribute(Id)]
     public class GeneratePropertyDataAction : GenerateActionBase<GeneratePropertyDataItemProvider>
     {
         private static readonly ILog Log = LogManager.GetCurrentClassLogger();

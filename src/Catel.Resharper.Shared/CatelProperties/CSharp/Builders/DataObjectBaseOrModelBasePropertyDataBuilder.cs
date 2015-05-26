@@ -31,13 +31,8 @@ namespace Catel.ReSharper.CatelProperties.CSharp.Builders
 
         #region Public Methods and Operators
 
-#if R70 || R71 || R80 || R81 || R82 ||R90
         /// <exception cref="System.ArgumentNullException">The <paramref name="context"/> is <c>null</c>.</exception>
         protected override void Process(CSharpGeneratorContext context)
-
-#elif R61
-        public override void Process(CSharpGeneratorContext context)
-#endif
         {
             Argument.IsNotNull(() => context);
 

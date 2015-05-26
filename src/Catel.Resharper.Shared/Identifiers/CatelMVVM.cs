@@ -6,13 +6,9 @@
 namespace Catel.ReSharper.Identifiers
 {
     using Catel.ReSharper.Helpers;
-
     using JetBrains.ReSharper.Psi;
-
-#if R80 || R81 || R82 || R90
     using JetBrains.Metadata.Reader.API;
     using JetBrains.ReSharper.Psi.Modules;
-#endif
 
     /// <summary>
     /// The MVVM well known type names.
@@ -34,7 +30,6 @@ namespace Catel.ReSharper.Identifiers
         /// </summary>
         public const string ViewModelToModelAttribute = "Catel.MVVM.ViewModelToModelAttribute";
 
-#if R80 || R81 || R82 || R90
         public static bool TryGetViewModelToModelAttributeTypeElement(IPsiModule psiModule, IModuleReferenceResolveContext moduleReferenceResolveContext, out ITypeElement typeElement)
         {
             return TypeHelper.TryGetTypeElement(ViewModelToModelAttribute, psiModule, moduleReferenceResolveContext, out typeElement);
@@ -48,23 +43,6 @@ namespace Catel.ReSharper.Identifiers
         public static bool TryGetViewModelBaseTypeElement(IPsiModule psiModule, IModuleReferenceResolveContext moduleReferenceResolveContext, out ITypeElement typeElement)
         {
             return TypeHelper.TryGetTypeElement(ViewModelBase, psiModule, moduleReferenceResolveContext, out typeElement);
-        }       
-
-#else
-        public static bool TryGetViewModelToModelAttributeTypeElement(IPsiModule psiModule, out ITypeElement typeElement)
-        {
-            return TypeHelper.TryGetTypeElement(ViewModelToModelAttribute, psiModule, out typeElement);
         }
-
-        public static bool TryGetModelAttributeTypeElement(IPsiModule psiModule, out ITypeElement typeElement)
-        {
-            return TypeHelper.TryGetTypeElement(ModelAttribute, psiModule, out typeElement);
-        }
-
-        public static bool TryGetViewModelBaseTypeElement(IPsiModule psiModule, out ITypeElement typeElement)
-        {
-            return TypeHelper.TryGetTypeElement(ViewModelBase, psiModule, out typeElement);
-        }
-#endif
     }
 }

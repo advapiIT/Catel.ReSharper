@@ -10,12 +10,12 @@ namespace Catel.ReSharper.Arguments
 
     using Catel.Logging;
 
-#if R90
-    using JetBrains.ReSharper.Feature.Services.ContextActions;
-    using JetBrains.ReSharper.Feature.Services.CSharp.Analyses.Bulbs;
-#else
+#if R8X
     using JetBrains.ReSharper.Feature.Services.Bulbs;
     using JetBrains.ReSharper.Feature.Services.CSharp.Bulbs;
+#else
+    using JetBrains.ReSharper.Feature.Services.ContextActions;
+    using JetBrains.ReSharper.Feature.Services.CSharp.Analyses.Bulbs;
 #endif
 
     using JetBrains.ReSharper.Psi;

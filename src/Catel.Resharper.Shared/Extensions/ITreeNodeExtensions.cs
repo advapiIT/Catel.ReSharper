@@ -50,29 +50,12 @@ namespace Catel.ReSharper
 
             return fields;
         }
-
-#if R81 || R82 || R90
         public static Dictionary<string, List<DocumentRange>> GetFields(this ITreeNode @this)
         {
             Argument.IsNotNull(() => @this);
 
             return GetDocumentRangesDictionary(@this);
         }
-#else
-        public static Dictionary<string, List<TextRange>> GetFields(this ITreeNode @this)
-        {
-            Argument.IsNotNull(() => @this);
-            var documentRangesDictionary = @this.GetDocumentRangesDictionary();
-            
-            var  fields = new Dictionary<string, List<TextRange>>();
-            foreach (var keyValuePair in documentRangesDictionary)
-            {
-                fields[keyValuePair.Key] = keyValuePair.Value.Select(range => range.TextRange).ToList();
-            }
-
-            return fields;
-        }
-#endif
 
         #endregion
     }
