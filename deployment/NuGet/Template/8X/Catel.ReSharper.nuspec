@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package>
   <metadata>
-    <id>Catel.ReSharper.8X</id>
+    <id>Catel.ReSharper</id>
     <version>[VERSION]</version>
     <title>Catel.ReSharper</title>
     <authors>Igr Alexánder Fernández Saúco</authors>
