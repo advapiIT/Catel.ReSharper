@@ -10,7 +10,7 @@ namespace Catel.ReSharper
 
     using Catel.Logging;
     using JetBrains.Util;
-
+    using LogEvent = Logging.LogEvent;
 #if R80 || R81 || R82 || R90
     using JetBrains.Util.Logging;
 #endif
@@ -31,23 +31,7 @@ namespace Catel.ReSharper
         #endregion
 
         #region Public Methods and Operators
-
-        protected override void Debug(ILog log, string message, object extraData, LogData logData, DateTime time)
-        {
-            Logger.LogMessage(message);
-        }
-
-        protected override void Info(ILog log, string message, object extraData, LogData logData, DateTime time)
-        {
-            Logger.LogMessage(message);
-        }
-
-        protected override void Warning(ILog log, string message, object extraData, LogData logData, DateTime time)
-        {
-            Logger.LogMessage(message);
-        }
-
-        protected override void Error(ILog log, string message, object extraData, LogData logData, DateTime time)
+        protected override void Write(ILog log, string message, LogEvent logEvent, object extraData, LogData logData, DateTime time)
         {
             Logger.LogMessage(message);
         }
