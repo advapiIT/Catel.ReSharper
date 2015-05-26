@@ -17,7 +17,8 @@
     <RestorePackages>true</RestorePackages>
     <TargetFrameworkProfile />
     <FodyPath>..\..\lib\Fody.1.20.0.0</FodyPath>
-    <NuGetPackageImportStamp>6ff6d016</NuGetPackageImportStamp>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -98,6 +99,18 @@
     <Reference Include="Microsoft.Deployment.WindowsInstaller">
       <HintPath>..\..\lib\JetBrains.Platform.Lib.Microsoft.Deployment.WindowsInstaller.2.0.20140821.0\lib\Microsoft.Deployment.WindowsInstaller.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Threading.Tasks">
+      <HintPath>..\..\lib\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Threading.Tasks.Extensions">
+      <HintPath>..\..\lib\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.Extensions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Threading.Tasks.Extensions.Desktop">
+      <HintPath>..\..\lib\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.Extensions.Desktop.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.VisualStudio.Shell.Interop">
       <HintPath>..\..\lib\JetBrains.Platform.Lib.VisualStudio.AnyVs.ShellInterop.PrivateBuild.2.0.20140304.0\lib\Microsoft.VisualStudio.Shell.Interop.dll</HintPath>
       <Private>True</Private>
@@ -140,8 +153,21 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.IO">
+      <HintPath>..\..\lib\Microsoft.Bcl.1.1.10\lib\net40\System.IO.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net" />
+    <Reference Include="System.Runtime">
+      <HintPath>..\..\lib\Microsoft.Bcl.1.1.10\lib\net40\System.Runtime.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Threading">
       <HintPath>..\..\lib\TaskParallelLibrary.1.0.2856.0\lib\Net35\System.Threading.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Threading.Tasks">
+      <HintPath>..\..\lib\Microsoft.Bcl.1.1.10\lib\net40\System.Threading.Tasks.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Windows.Forms" />
@@ -162,6 +188,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
@@ -200,6 +227,7 @@
     <Error Condition="!Exists('..\..\lib\JetBrains.Platform.Tests.Framework.102.0.20150418.113331\build\JetBrains.Platform.Tests.Framework.Targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\lib\JetBrains.Platform.Tests.Framework.102.0.20150418.113331\build\JetBrains.Platform.Tests.Framework.Targets'))" />
     <Error Condition="!Exists('..\..\lib\JetBrains.Psi.Features.test.Framework.102.0.20150418.115859\build\JetBrains.Psi.Features.test.Framework.Targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\lib\JetBrains.Psi.Features.test.Framework.102.0.20150418.115859\build\JetBrains.Psi.Features.test.Framework.Targets'))" />
     <Error Condition="!Exists('..\..\lib\JetBrains.ReSharper.SDK.9.1.20150418.124209\build\JetBrains.ReSharper.SDK.Targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\lib\JetBrains.ReSharper.SDK.9.1.20150418.124209\build\JetBrains.ReSharper.SDK.Targets'))" />
+    <Error Condition="!Exists('..\..\lib\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\lib\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets'))" />
   </Target>
   <Import Project="..\..\lib\Antlr2.Tools.2.7.6.3\build\Antlr2.Tools.targets" Condition="Exists('..\..\lib\Antlr2.Tools.2.7.6.3\build\Antlr2.Tools.targets')" />
   <Import Project="..\..\lib\JetBrains.Build.Platform.Tasks.ThemedIconsPacker.2.0.20141124.0\build\JetBrains.Build.Platform.Tasks.ThemedIconsPacker.Targets" Condition="Exists('..\..\lib\JetBrains.Build.Platform.Tasks.ThemedIconsPacker.2.0.20141124.0\build\JetBrains.Build.Platform.Tasks.ThemedIconsPacker.Targets')" />
@@ -217,6 +245,7 @@
   <Import Project="..\..\lib\JetBrains.Platform.Tests.Framework.102.0.20150418.113331\build\JetBrains.Platform.Tests.Framework.Targets" Condition="Exists('..\..\lib\JetBrains.Platform.Tests.Framework.102.0.20150418.113331\build\JetBrains.Platform.Tests.Framework.Targets')" />
   <Import Project="..\..\lib\JetBrains.Psi.Features.test.Framework.102.0.20150418.115859\build\JetBrains.Psi.Features.test.Framework.Targets" Condition="Exists('..\..\lib\JetBrains.Psi.Features.test.Framework.102.0.20150418.115859\build\JetBrains.Psi.Features.test.Framework.Targets')" />
   <Import Project="..\..\lib\JetBrains.ReSharper.SDK.9.1.20150418.124209\build\JetBrains.ReSharper.SDK.Targets" Condition="Exists('..\..\lib\JetBrains.ReSharper.SDK.9.1.20150418.124209\build\JetBrains.ReSharper.SDK.Targets')" />
+  <Import Project="..\..\lib\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\..\lib\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
