@@ -37,6 +37,4 @@ using System.Runtime.CompilerServices;
 [assembly: AssemblyInformationalVersion("1.0, manually built in Visual Studio")]
 
 // CLS compliant
-#if !NETFX_CORE && !XAMARIN && !TEST
 [assembly: CLSCompliant(true)]
-#endif
