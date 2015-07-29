@@ -72,6 +72,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Types\InheritFromDataObjectBaseAction.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Types\InheritFromModelBaseAction.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Types\InheritFromViewModelBaseAction.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ZoneMarker.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)Settings.StyleCop" />
