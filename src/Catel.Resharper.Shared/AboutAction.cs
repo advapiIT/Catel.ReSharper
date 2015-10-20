@@ -10,14 +10,14 @@ namespace Catel.ReSharper
     using JetBrains.ActionManagement;
     using JetBrains.Application.DataContext;
 
-#if R90 || R91
+#if R9X
     using JetBrains.UI.ActionsRevised;
 #endif
 
     /// <summary>
     /// The about action
     /// </summary>
-#if R90 || R91
+#if R90 || R91 || R92
     [Action("Catel.ReSharper.About")]
     public class AboutAction : IExecutableAction
 #else

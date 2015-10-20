@@ -6,26 +6,31 @@
 namespace Catel.ReSharper.CatelProperties.Workflows
 {
 
-    using Catel.Logging;
     using Catel.ReSharper.CatelProperties.Actions;
 
     using JetBrains.Application.DataContext;
-    using JetBrains.ProjectModel;
     using JetBrains.ReSharper.Feature.Services.Generate;
     using JetBrains.ReSharper.Feature.Services.Generate.Actions;
     using JetBrains.ReSharper.Psi;
     using JetBrains.UI.Icons;
 
+#if R92
+    using JetBrains.ReSharper.Feature.Services.Generate.Workflows;
+#endif
+
+
     using DataConstants = JetBrains.ProjectModel.DataContext.DataConstants;
 
-#if R90 || R91
+#if R9X
     using JetBrains.ReSharper.Feature.Services.Generate.UI.New;
 #endif
 
+#if R92
+    public class GeneratePropertyDataWorkflow : GenerateCodeWorkflowBase
+#else
     public class GeneratePropertyDataWorkflow : StandardGenerateActionWorkflow
+#endif
     {
-        private static readonly ILog Log = LogManager.GetCurrentClassLogger();
-
         private const string Description = "Generate Catel properties from available auto properties";
 
         private const string WindowTitle = "Generate Catel properties";
@@ -46,9 +51,13 @@ namespace Catel.ReSharper.CatelProperties.Workflows
         {
             get { return 100; }
         }
+
         #endregion
 
+#if R81 || R82 || R90 || R91 
+
         #region Public Methods and Operators
+
         public override bool IsAvailable(IDataContext dataContext)
         {
             Argument.IsNotNull(() => dataContext);
@@ -73,5 +82,6 @@ namespace Catel.ReSharper.CatelProperties.Workflows
         }
 
         #endregion
+#endif
     }
 }
