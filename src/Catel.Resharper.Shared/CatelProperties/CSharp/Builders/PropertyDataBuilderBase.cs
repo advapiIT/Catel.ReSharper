@@ -29,7 +29,7 @@ namespace Catel.ReSharper.CatelProperties.CSharp.Builders
 
         protected static class OptionTitles
         {
-            public const string ForwardEventArgumentToImplementedPropertyChangedNotificationMethod = "Forward the event argument to property changed notification method";
+            public const string ForwardEventArgumentToImplementedPropertyChangedNotificationMethod = "&Forward property changed event argument to notification method";
 
             public const string ImplementPropertyChangedNotificationMethod = "Implement property changed &notification method";
 
