@@ -1,9 +1,14 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{EFD27AC9-C61B-4774-8667-E481EDB79F5B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lib", "lib", "{1A7B056A-C25F-464E-8412-525A6D5CCE9D}"
+	ProjectSection(SolutionItems) = preProject
+		..\lib\repositories.config = ..\lib\repositories.config
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "doc", "doc", "{612EC195-15E2-4DB9-8F95-2E30B679C31F}"
 	ProjectSection(SolutionItems) = preProject
@@ -12,40 +17,40 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "doc", "doc", "{612EC195-15E
 		..\doc\requirements.txt = ..\doc\requirements.txt
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catel.Resharper.R70", "Catel.Resharper.R70\Catel.Resharper.R70.csproj", "{1F90A69D-2838-4263-BDA6-B6983A994D25}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catel.Resharper.R61", "Catel.Resharper.R61\Catel.Resharper.R61.csproj", "{58E2BDBF-668D-473A-BCF7-70994B96B84B}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catel.Resharper.R71", "Catel.Resharper.R71\Catel.Resharper.R71.csproj", "{870AA2A4-D22A-460C-A3AC-FDEE2ED1E6C2}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catel.Resharper.R80", "Catel.Resharper.R80\Catel.Resharper.R80.csproj", "{41B73DE6-7587-4B2C-B16D-EF8C3D1F1B2C}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catel.Resharper.R81", "Catel.Resharper.R81\Catel.Resharper.R81.csproj", "{20034B76-19A9-4D3B-8FC5-5AB4FF002D97}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catel.Resharper.R82", "Catel.Resharper.R82\Catel.Resharper.R82.csproj", "{7BD7FE56-7DDB-48C4-B21E-1B75457E577A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catel.Resharper.R90", "Catel.Resharper.R90\Catel.Resharper.R90.csproj", "{89E6D457-C747-4D55-B5A3-ED0B51C3D300}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catel.Resharper.R91", "Catel.Resharper.R91\Catel.Resharper.R91.csproj", "{C68546C1-BBFC-43E1-9C28-9152AB797285}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "misc", "misc", "{81EC904C-0628-44B0-9590-07AEF99B1BF1}"
+	ProjectSection(SolutionItems) = preProject
+		Catel.Resharper.sln.DotSettings = Catel.Resharper.sln.DotSettings
+		nuget.config = nuget.config
+		Settings.StyleCop = Settings.StyleCop
+		SolutionAssemblyInfo.cs = SolutionAssemblyInfo.cs
+	EndProjectSection
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Catel.Resharper.Shared", "Catel.Resharper.Shared\Catel.Resharper.Shared.shproj", "{F373D7B9-4440-4051-9D1D-3D7C85260C5B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catel.Resharper.R92", "Catel.Resharper.R92\Catel.Resharper.R92.csproj", "{187C7142-017E-4BA3-97A7-F1687258B778}"
+EndProject
 Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		Catel.Resharper.Shared\Catel.Resharper.Shared.projitems*{f373d7b9-4440-4051-9d1d-3d7c85260c5b}*SharedItemsImports = 13
+		Catel.Resharper.Shared\Catel.Resharper.Shared.projitems*{89e6d457-c747-4d55-b5a3-ed0b51c3d300}*SharedItemsImports = 4
+		Catel.Resharper.Shared\Catel.Resharper.Shared.projitems*{187c7142-017e-4ba3-97a7-f1687258b778}*SharedItemsImports = 4
+		Catel.Resharper.Shared\Catel.Resharper.Shared.projitems*{c68546c1-bbfc-43e1-9c28-9152ab797285}*SharedItemsImports = 4
+		Catel.Resharper.Shared\Catel.Resharper.Shared.projitems*{7bd7fe56-7ddb-48c4-b21e-1b75457e577a}*SharedItemsImports = 4
+		Catel.Resharper.Shared\Catel.Resharper.Shared.projitems*{20034b76-19a9-4d3b-8fc5-5ab4ff002d97}*SharedItemsImports = 4
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{1F90A69D-2838-4263-BDA6-B6983A994D25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1F90A69D-2838-4263-BDA6-B6983A994D25}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1F90A69D-2838-4263-BDA6-B6983A994D25}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1F90A69D-2838-4263-BDA6-B6983A994D25}.Release|Any CPU.Build.0 = Release|Any CPU
-		{58E2BDBF-668D-473A-BCF7-70994B96B84B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{58E2BDBF-668D-473A-BCF7-70994B96B84B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{58E2BDBF-668D-473A-BCF7-70994B96B84B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{58E2BDBF-668D-473A-BCF7-70994B96B84B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{870AA2A4-D22A-460C-A3AC-FDEE2ED1E6C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{870AA2A4-D22A-460C-A3AC-FDEE2ED1E6C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{870AA2A4-D22A-460C-A3AC-FDEE2ED1E6C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{870AA2A4-D22A-460C-A3AC-FDEE2ED1E6C2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{41B73DE6-7587-4B2C-B16D-EF8C3D1F1B2C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{41B73DE6-7587-4B2C-B16D-EF8C3D1F1B2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{41B73DE6-7587-4B2C-B16D-EF8C3D1F1B2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{41B73DE6-7587-4B2C-B16D-EF8C3D1F1B2C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{20034B76-19A9-4D3B-8FC5-5AB4FF002D97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{20034B76-19A9-4D3B-8FC5-5AB4FF002D97}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{20034B76-19A9-4D3B-8FC5-5AB4FF002D97}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -54,16 +59,28 @@ Global
 		{7BD7FE56-7DDB-48C4-B21E-1B75457E577A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7BD7FE56-7DDB-48C4-B21E-1B75457E577A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7BD7FE56-7DDB-48C4-B21E-1B75457E577A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89E6D457-C747-4D55-B5A3-ED0B51C3D300}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89E6D457-C747-4D55-B5A3-ED0B51C3D300}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89E6D457-C747-4D55-B5A3-ED0B51C3D300}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89E6D457-C747-4D55-B5A3-ED0B51C3D300}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C68546C1-BBFC-43E1-9C28-9152AB797285}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C68546C1-BBFC-43E1-9C28-9152AB797285}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C68546C1-BBFC-43E1-9C28-9152AB797285}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C68546C1-BBFC-43E1-9C28-9152AB797285}.Release|Any CPU.Build.0 = Release|Any CPU
+		{187C7142-017E-4BA3-97A7-F1687258B778}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{187C7142-017E-4BA3-97A7-F1687258B778}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{187C7142-017E-4BA3-97A7-F1687258B778}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{187C7142-017E-4BA3-97A7-F1687258B778}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{1F90A69D-2838-4263-BDA6-B6983A994D25} = {EFD27AC9-C61B-4774-8667-E481EDB79F5B}
-		{58E2BDBF-668D-473A-BCF7-70994B96B84B} = {EFD27AC9-C61B-4774-8667-E481EDB79F5B}
-		{870AA2A4-D22A-460C-A3AC-FDEE2ED1E6C2} = {EFD27AC9-C61B-4774-8667-E481EDB79F5B}
-		{41B73DE6-7587-4B2C-B16D-EF8C3D1F1B2C} = {EFD27AC9-C61B-4774-8667-E481EDB79F5B}
 		{20034B76-19A9-4D3B-8FC5-5AB4FF002D97} = {EFD27AC9-C61B-4774-8667-E481EDB79F5B}
 		{7BD7FE56-7DDB-48C4-B21E-1B75457E577A} = {EFD27AC9-C61B-4774-8667-E481EDB79F5B}
+		{89E6D457-C747-4D55-B5A3-ED0B51C3D300} = {EFD27AC9-C61B-4774-8667-E481EDB79F5B}
+		{C68546C1-BBFC-43E1-9C28-9152AB797285} = {EFD27AC9-C61B-4774-8667-E481EDB79F5B}
+		{F373D7B9-4440-4051-9D1D-3D7C85260C5B} = {EFD27AC9-C61B-4774-8667-E481EDB79F5B}
+		{187C7142-017E-4BA3-97A7-F1687258B778} = {EFD27AC9-C61B-4774-8667-E481EDB79F5B}
 	EndGlobalSection
 EndGlobal
