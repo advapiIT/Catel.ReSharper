@@ -12,6 +12,7 @@ namespace Catel.ReSharper.CatelProperties.CSharp
     using Catel.Logging;
     using Catel.ReSharper.CatelProperties.CSharp.Patterns;
     using Catel.ReSharper.CatelProperties.Patterns;
+    using Catel.ReSharper.Helpers;
     using Catel.ReSharper.Identifiers;
 
     using JetBrains.Annotations;
@@ -62,7 +63,7 @@ namespace Catel.ReSharper.CatelProperties.CSharp
         {
             Argument.IsNotNull(() => propertyDeclaration);
 
-            var propertyDataType = TypeFactory.CreateTypeByCLRName(CatelCore.PropertyData, _psiModule, propertyDeclaration.GetResolveContext());
+            var propertyDataType = TypeHelper.CreateTypeByCLRName(CatelCore.PropertyData, _psiModule, propertyDeclaration.GetResolveContext());
             if (!propertyDeclaration.IsAuto)
             {
                 throw new ArgumentException("The 'propertyDeclaration' is not auto");
@@ -121,7 +122,7 @@ namespace Catel.ReSharper.CatelProperties.CSharp
                                 methodName);
                     }
 
-                    var advancedPropertyChangedEventArgsType = TypeFactory.CreateTypeByCLRName(CatelCore.AdvancedPropertyChangedEventArgs, _psiModule, propertyDeclaration.GetResolveContext());
+                    var advancedPropertyChangedEventArgsType = TypeHelper.CreateTypeByCLRName(CatelCore.AdvancedPropertyChangedEventArgs, _psiModule, propertyDeclaration.GetResolveContext());
                     methodDeclaration =
                         (IMethodDeclaration)
                         _factory.CreateTypeMemberDeclaration(

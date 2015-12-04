@@ -11,6 +11,7 @@ namespace Catel.ReSharper.Arguments
 
     using Catel.Logging;
     using Catel.ReSharper.CSharp;
+    using Catel.ReSharper.Helpers;
     using Catel.ReSharper.Identifiers;
 
     using JetBrains.Application;
@@ -64,7 +65,7 @@ namespace Catel.ReSharper.Arguments
             {
                 if (Provider.SelectedElement != null)
                 {
-                    var catelArgumentType = TypeFactory.CreateTypeByCLRName(CatelCore.Argument, Provider.PsiModule, Provider.SelectedElement.GetResolveContext());
+                    var catelArgumentType = TypeHelper.CreateTypeByCLRName(CatelCore.Argument, Provider.PsiModule, Provider.SelectedElement.GetResolveContext());
                     _parameterDeclaration = null;
                     _methodDeclaration = null;
 

@@ -62,6 +62,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)CSharp\ContextActionBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\DictionaryWithKeyStringOfListOfTextRangeOrDocumentRangeExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\ITreeNodeExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\ConstantValueHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\TypeHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Identifiers\CatelCore.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Identifiers\CatelMVVM.cs" />

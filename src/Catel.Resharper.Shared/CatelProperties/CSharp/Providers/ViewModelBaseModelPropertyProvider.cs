@@ -10,6 +10,7 @@ namespace Catel.ReSharper.CatelProperties.CSharp.Providers
     using System.Linq;
 
     using Catel.Logging;
+    using Catel.ReSharper.Helpers;
     using Catel.ReSharper.Identifiers;
 
     using JetBrains.ReSharper.Feature.Services.CSharp.Generate;
@@ -46,12 +47,12 @@ namespace Catel.ReSharper.CatelProperties.CSharp.Providers
                 var classLikeDeclaration = context.ClassDeclaration;
                 var declaredElement = classLikeDeclaration.DeclaredElement;
                 var moduleReferenceResolveContext = context.Anchor.GetResolveContext();
-                var viewModelBaseElement = TypeFactory.CreateTypeByCLRName(CatelMVVM.ViewModelBase, context.PsiModule, moduleReferenceResolveContext).GetTypeElement();
+                var viewModelBaseElement = TypeHelper.CreateTypeByCLRName(CatelMVVM.ViewModelBase, context.PsiModule, moduleReferenceResolveContext).GetTypeElement();
 
                 if (declaredElement is IClass && declaredElement.IsDescendantOf(viewModelBaseElement))
                 {
-                    var modelAttributeClrType = TypeFactory.CreateTypeByCLRName(CatelMVVM.ModelAttribute, context.PsiModule, moduleReferenceResolveContext);
-                    var viewModelToModelAttributeClrType = TypeFactory.CreateTypeByCLRName(CatelMVVM.ViewModelToModelAttribute, context.PsiModule, moduleReferenceResolveContext);
+                    var modelAttributeClrType = TypeHelper.CreateTypeByCLRName(CatelMVVM.ModelAttribute, context.PsiModule, moduleReferenceResolveContext);
+                    var viewModelToModelAttributeClrType = TypeHelper.CreateTypeByCLRName(CatelMVVM.ViewModelToModelAttribute, context.PsiModule, moduleReferenceResolveContext);
                     var properties = new List<IProperty>();
                     var element = declaredElement;
 

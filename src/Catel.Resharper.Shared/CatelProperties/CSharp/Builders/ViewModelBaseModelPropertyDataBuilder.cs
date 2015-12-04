@@ -10,6 +10,7 @@ namespace Catel.ReSharper.CatelProperties.CSharp.Builders
     using System.Linq;
 
     using Catel.Logging;
+    using Catel.ReSharper.Helpers;
     using Catel.ReSharper.CatelProperties.CSharp.Patterns;
     using Catel.ReSharper.Identifiers;
     using JetBrains.Metadata.Reader.API;
@@ -48,7 +49,7 @@ namespace Catel.ReSharper.CatelProperties.CSharp.Builders
             Argument.IsNotNull(() => context);
 
             var factory = CSharpElementFactory.GetInstance(context.Root.GetPsiModule());
-            var viewModelToModelAttributeClrType = TypeFactory.CreateTypeByCLRName(CatelMVVM.ViewModelToModelAttribute, context.PsiModule, UniversalModuleReferenceContext.Instance);
+            var viewModelToModelAttributeClrType = TypeHelper.CreateTypeByCLRName(CatelMVVM.ViewModelToModelAttribute, context.PsiModule, UniversalModuleReferenceContext.Instance);
 
             var declaredElements = context.InputElements.OfType<GeneratorDeclaredElement>().ToList();
             var classLikeDeclaration = context.ClassDeclaration;
@@ -125,11 +126,11 @@ namespace Catel.ReSharper.CatelProperties.CSharp.Builders
                             }
                         }
 
-                        var fixedArguments = new List<AttributeValue> { new AttributeValue(ClrConstantValueFactory.CreateStringValue(model.ShortName, context.PsiModule, UniversalModuleReferenceContext.Instance)) };
+                        var fixedArguments = new List<AttributeValue> { new AttributeValue(ConstantValueHelper.CreateStringValue(model.ShortName, context.PsiModule, UniversalModuleReferenceContext.Instance)) };
 
                         if (propertyName != modelProperty.ShortName)
                         {
-                            fixedArguments.Add(new AttributeValue(ClrConstantValueFactory.CreateStringValue(modelProperty.ShortName, context.PsiModule, UniversalModuleReferenceContext.Instance)));
+                            fixedArguments.Add(new AttributeValue(ConstantValueHelper.CreateStringValue(modelProperty.ShortName, context.PsiModule, UniversalModuleReferenceContext.Instance)));
                         }
 
                         Log.Debug("Adding attribute ViewModelToModel to property '{0}'", propertyName);
