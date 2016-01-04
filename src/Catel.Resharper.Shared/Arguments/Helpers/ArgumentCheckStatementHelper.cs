@@ -7,6 +7,7 @@
 namespace Catel.ReSharper.Arguments
 {
     using Catel.ReSharper.Arguments.Patterns;
+    using Catel.ReSharper.Helpers;
     using Catel.ReSharper.Identifiers;
     using JetBrains.ReSharper.Psi;
     using JetBrains.ReSharper.Psi.Tree;
@@ -81,7 +82,7 @@ namespace Catel.ReSharper.Arguments
             Argument.IsNotNullOrWhitespace(() => pattern);
             Argument.IsNotNull(() => parameterDeclaration);
 
-            var catelArgumentType = TypeFactory.CreateTypeByCLRName(CatelCore.Argument, provider.PsiModule, provider.SelectedElement.GetResolveContext());
+            var catelArgumentType = TypeHelper.CreateTypeByCLRName(CatelCore.Argument, provider.PsiModule, provider.SelectedElement.GetResolveContext());
 
             return provider.ElementFactory.CreateStatement(pattern, catelArgumentType.GetTypeElement(), parameterDeclaration.DeclaredName);
         }

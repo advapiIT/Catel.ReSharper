@@ -8,6 +8,8 @@ namespace Catel.ReSharper.Types
     using System;
 
     using Catel.ReSharper.CSharp;
+    using Catel.ReSharper.Helpers;
+
     using CatelProperties.CSharp;
     using JetBrains.Application;
     using JetBrains.Application.Progress;
@@ -53,7 +55,7 @@ namespace Catel.ReSharper.Types
             {
                 if (Provider.SelectedElement != null)
                 {
-                    _superType = TypeFactory.CreateTypeByCLRName(SuperTypeName, Provider.PsiModule, Provider.SelectedElement.GetResolveContext());
+                    _superType = TypeHelper.CreateTypeByCLRName(SuperTypeName, Provider.PsiModule, Provider.SelectedElement.GetResolveContext());
                     if (_superType.GetTypeElement() != null)
                     {
                         _classDeclaration = Provider.SelectedElement.Parent as IClassDeclaration;

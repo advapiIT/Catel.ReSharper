@@ -37,6 +37,8 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Catel.Resharper.Shared", "C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catel.Resharper.R92", "Catel.Resharper.R92\Catel.Resharper.R92.csproj", "{187C7142-017E-4BA3-97A7-F1687258B778}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catel.Resharper.R10", "Catel.Resharper.R10\Catel.Resharper.R10.csproj", "{AF7E70C1-6A8A-4681-8130-FFCF7AC79B83}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		Catel.Resharper.Shared\Catel.Resharper.Shared.projitems*{f373d7b9-4440-4051-9d1d-3d7c85260c5b}*SharedItemsImports = 13
@@ -44,6 +46,7 @@ Global
 		Catel.Resharper.Shared\Catel.Resharper.Shared.projitems*{187c7142-017e-4ba3-97a7-f1687258b778}*SharedItemsImports = 4
 		Catel.Resharper.Shared\Catel.Resharper.Shared.projitems*{c68546c1-bbfc-43e1-9c28-9152ab797285}*SharedItemsImports = 4
 		Catel.Resharper.Shared\Catel.Resharper.Shared.projitems*{7bd7fe56-7ddb-48c4-b21e-1b75457e577a}*SharedItemsImports = 4
+		Catel.Resharper.Shared\Catel.Resharper.Shared.projitems*{af7e70c1-6a8a-4681-8130-ffcf7ac79b83}*SharedItemsImports = 4
 		Catel.Resharper.Shared\Catel.Resharper.Shared.projitems*{20034b76-19a9-4d3b-8fc5-5ab4ff002d97}*SharedItemsImports = 4
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -71,6 +74,10 @@ Global
 		{187C7142-017E-4BA3-97A7-F1687258B778}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{187C7142-017E-4BA3-97A7-F1687258B778}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{187C7142-017E-4BA3-97A7-F1687258B778}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF7E70C1-6A8A-4681-8130-FFCF7AC79B83}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF7E70C1-6A8A-4681-8130-FFCF7AC79B83}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF7E70C1-6A8A-4681-8130-FFCF7AC79B83}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF7E70C1-6A8A-4681-8130-FFCF7AC79B83}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -82,5 +89,6 @@ Global
 		{C68546C1-BBFC-43E1-9C28-9152AB797285} = {EFD27AC9-C61B-4774-8667-E481EDB79F5B}
 		{F373D7B9-4440-4051-9D1D-3D7C85260C5B} = {EFD27AC9-C61B-4774-8667-E481EDB79F5B}
 		{187C7142-017E-4BA3-97A7-F1687258B778} = {EFD27AC9-C61B-4774-8667-E481EDB79F5B}
+		{AF7E70C1-6A8A-4681-8130-FFCF7AC79B83} = {EFD27AC9-C61B-4774-8667-E481EDB79F5B}
 	EndGlobalSection
 EndGlobal

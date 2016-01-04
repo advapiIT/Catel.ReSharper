@@ -3,10 +3,11 @@
 //   Copyright (c) 2008 - 2012 Catel development team. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
+
 namespace Catel.ReSharper.Helpers
 {
-    using JetBrains.ReSharper.Psi;
     using JetBrains.Metadata.Reader.API;
+    using JetBrains.ReSharper.Psi;
     using JetBrains.ReSharper.Psi.Modules;
 
     /// <summary>
@@ -16,9 +17,24 @@ namespace Catel.ReSharper.Helpers
     {
         public static bool TryGetTypeElement(string typeName, IPsiModule psiModule, IModuleReferenceResolveContext moduleReferenceResolveContext, out ITypeElement typeElement)
         {
-            typeElement = TypeFactory.CreateTypeByCLRName(typeName, psiModule, moduleReferenceResolveContext).GetTypeElement();
+            typeElement = null;
+
+            var typeByClrName = CreateTypeByCLRName(typeName, psiModule, moduleReferenceResolveContext);
+            if (typeByClrName != null)
+            {
+                typeElement = typeByClrName.GetTypeElement();
+            }
 
             return typeElement != null;
+        }
+
+        public static IDeclaredType CreateTypeByCLRName(string typeName, IPsiModule psiModule, IModuleReferenceResolveContext moduleReferenceResolveContext)
+        {
+#if R10
+            return TypeFactory.CreateTypeByCLRName(typeName, psiModule);
+#else
+            return TypeFactory.CreateTypeByCLRName(typeName, psiModule, moduleReferenceResolveContext);
+#endif
         }
     }
 }
