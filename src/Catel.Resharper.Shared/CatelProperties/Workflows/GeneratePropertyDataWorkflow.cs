@@ -14,18 +14,18 @@ namespace Catel.ReSharper.CatelProperties.Workflows
     using JetBrains.ReSharper.Psi;
     using JetBrains.UI.Icons;
 
-#if R92
+#if R92 || R10X
     using JetBrains.ReSharper.Feature.Services.Generate.Workflows;
 #endif
 
 
     using DataConstants = JetBrains.ProjectModel.DataContext.DataConstants;
 
-#if R9X
+#if R9X || R10X
     using JetBrains.ReSharper.Feature.Services.Generate.UI.New;
 #endif
 
-#if R92
+#if R92 || R10X
     public class GeneratePropertyDataWorkflow : GenerateCodeWorkflowBase
 #else
     public class GeneratePropertyDataWorkflow : StandardGenerateActionWorkflow

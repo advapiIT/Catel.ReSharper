@@ -21,7 +21,7 @@ namespace Catel.ReSharper.CatelProperties.CSharp.Actions
     using JetBrains.TextControl;
     using JetBrains.Util;
 
-#if R9X
+#if R9X || R10X
     using JetBrains.ReSharper.Resources.Shell;
     using JetBrains.ReSharper.Feature.Services.CSharp.Analyses.Bulbs;
 #endif
