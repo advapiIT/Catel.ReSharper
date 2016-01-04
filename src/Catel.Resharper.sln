@@ -37,7 +37,7 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Catel.Resharper.Shared", "C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catel.Resharper.R92", "Catel.Resharper.R92\Catel.Resharper.R92.csproj", "{187C7142-017E-4BA3-97A7-F1687258B778}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catel.Resharper.R10", "Catel.Resharper.R10\Catel.Resharper.R10.csproj", "{AF7E70C1-6A8A-4681-8130-FFCF7AC79B83}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catel.Resharper.R100", "Catel.Resharper.R100\Catel.Resharper.R100.csproj", "{AF7E70C1-6A8A-4681-8130-FFCF7AC79B83}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
