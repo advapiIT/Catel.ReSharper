@@ -1,6 +1,8 @@
 Catel.ReSharper
 ===============
 
+# Introduction
+
 Catel.ReSharper is a ReSharper plugin that helps with development in the following
 fields:
 
@@ -113,10 +115,89 @@ _into this:_
     
 _with pleasure!_
 
-## Documentation
+## Checking arguments of a method
 
-Documentation can be found at http://www.catelproject.com
+If you are not using the *Argument* class, you are definitely missing something! It allows you to check for a method input and make sure it is valid. So, instead of writing this:
 
-## Issue tracking
+	public void DoSomething(string myInput)
+	{
+	    if (string.IsNullOrWhitespace(myInput)
+	    {
+	        Log.Error("Argument 'myInput' cannot be null or whitespace");
+	        throw new ArgumentException("Argument 'myInput' cannot be null or whitespace", "myInput");
+	    }
+	
+	    // custom logic
+	}
 
-The issue tracker including a roadmap can be found at http://www.catelproject.com
+You can write this:
+
+	public void DoSomething(string myInput)
+	{
+	    Argument.IsNotNullOrWhitespace(() => myInput);
+	
+	    // custom logic
+	}
+
+However, when you are writing lots of code, then even this piece of code can be too much. Thanks to the* Catel.Resharper* plugin, it is possible to select the argument (in this case myInput), hit ALT + Enter and generate the code.
+
+
+## Converting regular properties into Catel properties
+
+to start of metadata
+
+Catel is extremely powerful, but sometimes the property definitions are lots of work to write down. The code snippets already make your life much easier, but with the Catel.Resharper plugin it might be even easier. You can simply write this code:
+
+	public class Person : ModelBase
+	{
+	    public string FirstName { get; set; }
+	    public string MiddleName { get; set; }
+	    public string LastName { get; set; }
+	}
+
+Then hit ALT + Enter and turn properties into Catel properties, which will result in this class:
+
+	public class Person : ModelBase
+	{
+	    /// <summary>
+	    /// Gets or sets the first name.
+	    /// </summary>
+	    public string FirstName
+	    {
+	        get { return GetValue<string>(FirstNameProperty); }
+	        set { SetValue(FirstNameProperty, value); }
+	    }
+	  
+	    /// <summary>
+	    /// Register the FirstName property so it is known in the class.
+	    /// </summary>
+	    public static readonly PropertyData FirstNameProperty = RegisterProperty<Person, string>(model => model.FirstName);
+	  
+	    /// <summary>
+	    /// Gets or sets the middle name.
+	    /// </summary>
+	    public string MiddleName
+	    {
+	        get { return GetValue<string>(MiddleNameProperty); }
+	        set { SetValue(MiddleNameProperty, value); }
+	    }
+	  
+	    /// <summary>
+	    /// Register the MiddleName property so it is known in the class.
+	    /// </summary>
+	    public static readonly PropertyData MiddleNameProperty = RegisterProperty<Person, string>(model => model.MiddleName);
+	  
+	    /// <summary>
+	    /// Gets or sets the last name.
+	    /// </summary>
+	    public string LastName
+	    {
+	        get { return GetValue<string>(LastNameProperty); }
+	        set { SetValue(LastNameProperty, value); }
+	    }
+	  
+	    /// <summary>
+	    /// Register the LastName property so it is known in the class.
+	    /// </summary>
+	    public static readonly PropertyData LastNameProperty = RegisterProperty<Person, string>(model => model.LastName);
+	}
