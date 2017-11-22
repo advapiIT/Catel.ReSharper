@@ -12,6 +12,8 @@ namespace Catel.ReSharper.CatelProperties.Actions
     using JetBrains.ReSharper.Feature.Services.Generate.Actions;
     using JetBrains.UI.RichText;
 
+    
+
 #if R8X
     using JbActionAttribute = JetBrains.ActionManagement.ActionHandlerAttribute;
 #else
